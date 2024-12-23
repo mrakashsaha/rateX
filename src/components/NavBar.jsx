@@ -28,6 +28,7 @@ const NavBar = () => {
             <li><NavLink to={"/services"}>Services</NavLink></li>
             <li><NavLink to={"/addServices"}>Add Service</NavLink></li>
             <li><NavLink to={"/myReviews"}>My Reviews</NavLink></li>
+            <li><NavLink to={"/myServices"}>My Services</NavLink></li>
         </>
     return (
         <div className='mx-auto container'>

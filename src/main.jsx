@@ -10,6 +10,7 @@ import Root from './Root';
 import AuthProvider from './context/AuthProvider';
 import Services from './layouts/Services';
 import AddServices from './layouts/AddServices';
+import MyServices from './layouts/MyServices';
 
 const router = createBrowserRouter([
   {
@@ -39,6 +40,10 @@ const router = createBrowserRouter([
       {
         path: "/myReviews",
         element: <MyReviews></MyReviews>,
+      },
+      {
+        path: "/myServices",
+        element: <MyServices></MyServices>,
       },
     ],
   },
