@@ -110,12 +110,12 @@ const AddServices = () => {
                         </label>
                         <select required name='category' defaultValue="-- Select Category --" className="select select-bordered rounded-md">
                             <option disabled>-- Select Category --</option>
-                            <option value="cleaning">Cleaning</option>
-                            <option value="IT_services">IT Services</option>
-                            <option value="fitness">Fitness</option>
-                            <option value="education">Education</option>
-                            <option value="healthcare">Healthcare</option>
-                            <option value="other">Other</option>
+                            <option value="Cleaning">Cleaning</option>
+                            <option value="IT Services">IT Services</option>
+                            <option value="Fitness">Fitness</option>
+                            <option value="Education">Education</option>
+                            <option value="Healthcare">Healthcare</option>
+                            <option value="Others">Others</option>
                         </select>
                     </div>
 
