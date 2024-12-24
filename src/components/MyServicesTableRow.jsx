@@ -1,5 +1,4 @@
 import React from 'react';
-import axiosAPI from '../axios/axiosAPI';
 
 const MyServicesTableRow = ({ myService, idx, handleDelete, handleUpdate }) => {
     const { _id, imageURL, title, companyName, companyURL, category, price, date } = myService;
@@ -24,7 +23,7 @@ const MyServicesTableRow = ({ myService, idx, handleDelete, handleUpdate }) => {
                     </div>
                 </td>
                 <td>
-                    <a href={companyURL} target='_blank' className="font-medium btn btn-link">{companyName}</a>
+                    <a href={companyURL} target='_blank' className="font-medium btn-link">{companyName}</a>
                 </td>
                 <td>
                     <div className="font-medium">{date}</div>

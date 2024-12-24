@@ -2,58 +2,13 @@ import React, { useContext, useEffect, useState } from 'react';
 import axiosAPI from '../axios/axiosAPI';
 import { AuthContext } from '../context/AuthProvider';
 import MyServicesTableRow from '../components/MyServicesTableRow';
+import moment from 'moment';
 
 const MyServices = () => {
     const { user } = useContext(AuthContext);
-
     const [displayMyServices, setDisplayMyServices] = useState([]);
-
-    const [modalFormValue, setModalFormValue] = useState ({});
-
-    const handleDelete = (id) => {
-        console.log(id);
-
-        axiosAPI.delete(`/myServices/${id}`)
-            .then(res => {
-                console.log(res.data);
-                const remainingServices = displayMyServices.filter(displayMyService => displayMyService._id !== id);
-                setDisplayMyServices(remainingServices);
-            })
-            .catch(error => console.log(error))
-    }
-
-    const handleUpdate = (id) => {
-        console.log(id);
-        document.getElementById('my_modal_5').showModal();
-        axiosAPI.get (`http://localhost:3000/services/${id}`)
-        .then (res=> setModalFormValue (res.data));
-    }
-
-    const handleUpdateService = (e) => {
-        e.preventDefault();
-        const formData = new FormData(e.target);
-        const initialData = Object.fromEntries(formData.entries());
-        
-        // Preparing Data For Post into MongoDB Through API
-        const {imageURL,title, companyName, companyURL, description, category, price} = initialData;
-        const userEmail = user.email;
-        const date = moment().format('DD-MM-YYYY, hh:mm  a');
-
-        const serviceDoc = {
-            imageURL,title, companyName, companyURL, description, category, price, userEmail, date
-        }
-
-        axiosAPI.post ("/services", serviceDoc)
-        .then (res=> {
-            console.log (res.data);
-            if (res.data.insertedId) {
-                alert ('Data Inserted Sucessfully');
-            }
-        })
-        .catch (error => console.log (error.message));
-        
-
-    }
+    const [modalFormValue, setModalFormValue] = useState({});
+    const [reFetch, setReFetch] = useState(false);
 
     useEffect(() => {
         axiosAPI.get(`/myServices?email=${user?.email}`)
@@ -61,14 +16,59 @@ const MyServices = () => {
 
                 setDisplayMyServices(res.data);
             });
-    }, [user])
+    }, [user, reFetch])
 
-    console.log(displayMyServices);
+
+    const handleUpdate = (id) => {
+        console.log(id);
+        document.getElementById('my_modal_5').showModal();
+        axiosAPI.get(`http://localhost:3000/services/${id}`)
+            .then(res => setModalFormValue(res.data));
+    }
+
+    const handleUpdateService = (e) => {
+        e.preventDefault();
+        const formData = new FormData(e.target);
+        const initialData = Object.fromEntries(formData.entries());
+
+        // Preparing Data For Post into MongoDB Through API
+        const { imageURL, title, companyName, companyURL, description, category, price } = initialData;
+        const userEmail = user.email;
+        const date = moment().format('DD-MM-YYYY, hh:mm  a');
+
+        const updateServiceDoc = {
+            imageURL, title, companyName, companyURL, description, category, price, userEmail, date
+        }
+
+        axiosAPI.put(`/updateService/${modalFormValue._id}`, updateServiceDoc)
+            .then(res => {
+                console.log(res.data);
+                if (res.data.modifiedCount) {
+                    setReFetch((alter) => !alter);
+                }
+            })
+            .catch(error => console.log(error))
+    }
+
+
+    const handleDelete = (id) => {
+
+        axiosAPI.delete(`/myServices/${id}`)
+            .then(res => {
+                console.log(res.data);
+                // const remainingServices = displayMyServices.filter(displayMyService => displayMyService._id !== id);
+                // setDisplayMyServices(remainingServices);
+                setReFetch((alter) => !alter);
+            })
+            .catch(error => console.log(error))
+    }
+
+
 
     return (
         <div className='container p-2 mx-auto'>
-            <h2 className='text-3xl text-center font-bold'>My Services</h2>
-            <div className='bg-base-100 shadow-md'>
+            <h2 className='text-3xl text-center font-bold pb-10'>My Services</h2>
+            <div className='bg-base-100 shadow-inherit border'>
                 <div className="overflow-x-auto">
                     <table className="table">
                         {/* head */}
@@ -84,15 +84,18 @@ const MyServices = () => {
                         </thead>
                         <tbody>
                             {
-                                displayMyServices.map((myService, idx) => <MyServicesTableRow key={idx} idx={idx + 1} myService={myService} handleDelete={handleDelete} handleUpdate={handleUpdate}></MyServicesTableRow>)
+                                displayMyServices?.map((myService, idx) => <MyServicesTableRow key={idx} idx={idx + 1} myService={myService} handleDelete={handleDelete} handleUpdate={handleUpdate}></MyServicesTableRow>)
                             }
                         </tbody>
                     </table>
                     <dialog id="my_modal_5" className="modal modal-bottom sm:modal-middle">
                         <div className="modal-box">
                             <div>
-                                <div className="my-10">
-                                    <form onSubmit={handleUpdateService} className="card-body bg-base-100 drop-shadow-lg max-w-5xl mx-auto">
+                                <div className="my-4">
+                                    <form onSubmit={handleUpdateService} className="card-body bg-base-100 drop-shadow-lg max-w-xl mx-auto">
+                                        <div>
+                                            <h3 className="font-bold text-lg text-center">Update Service!</h3>
+                                        </div>
                                         {/* Service Image */}
                                         <div className="form-control">
                                             <label className="label">
@@ -199,17 +202,20 @@ const MyServices = () => {
 
                                         {/* Submit Button */}
                                         <div className="form-control py-2">
-                                            <input className='btn btn-primary' type="submit" value="Add Service" />
+                                            <input className='btn btn-primary' type="submit" value="Update Service" />
+                                        </div>
+
+                                        <div className="modal-action m-0 form-control">
+                                            <form method="dialog">
+                                                {/* if there is a button in form, it will close the modal */}
+                                                <button className="w-full btn">Cancel</button>
+                                            </form>
                                         </div>
                                     </form>
+
                                 </div>
                             </div>
-                            <div className="modal-action">
-                                <form method="dialog">
-                                    {/* if there is a button in form, it will close the modal */}
-                                    <button className="btn">Close</button>
-                                </form>
-                            </div>
+
                         </div>
                     </dialog>
                 </div>
