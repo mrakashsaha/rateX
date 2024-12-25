@@ -22,7 +22,7 @@ const MyServices = () => {
     const handleUpdate = (id) => {
         console.log(id);
         document.getElementById('my_modal_5').showModal();
-        axiosAPI.get(`http://localhost:3000/services/${id}`)
+        axiosAPI.get(`/services/${id}`)
             .then(res => setModalFormValue(res.data));
     }
 
@@ -56,14 +56,10 @@ const MyServices = () => {
         axiosAPI.delete(`/myServices/${id}`)
             .then(res => {
                 console.log(res.data);
-                // const remainingServices = displayMyServices.filter(displayMyService => displayMyService._id !== id);
-                // setDisplayMyServices(remainingServices);
                 setReFetch((alter) => !alter);
             })
             .catch(error => console.log(error))
     }
-
-
 
     return (
         <div className='container p-2 mx-auto'>
@@ -91,8 +87,8 @@ const MyServices = () => {
                     <dialog id="my_modal_5" className="modal modal-bottom sm:modal-middle">
                         <div className="modal-box">
                             <div>
-                                <div className="my-4">
-                                    <form onSubmit={handleUpdateService} className="card-body bg-base-100 drop-shadow-lg max-w-xl mx-auto">
+                                <div className="card-body bg-base-100 drop-shadow-lg max-w-xl mx-auto">
+                                    <form onSubmit={handleUpdateService}>
                                         <div>
                                             <h3 className="font-bold text-lg text-center">Update Service!</h3>
                                         </div>
@@ -201,21 +197,19 @@ const MyServices = () => {
                                         </div>
 
                                         {/* Submit Button */}
-                                        <div className="form-control py-2">
+                                        <div className="form-control py-1 mt-2">
                                             <input className='btn btn-primary' type="submit" value="Update Service" />
-                                        </div>
-
-                                        <div className="modal-action m-0 form-control">
-                                            <form method="dialog">
-                                                {/* if there is a button in form, it will close the modal */}
-                                                <button className="w-full btn">Cancel</button>
-                                            </form>
                                         </div>
                                     </form>
 
+                                    <div className="modal-action m-0 form-control">
+                                        <form method="dialog">
+                                            {/* if there is a button in form, it will close the modal */}
+                                            <button className="w-full btn">Cancel</button>
+                                        </form>
+                                    </div>
                                 </div>
                             </div>
-
                         </div>
                     </dialog>
                 </div>

@@ -11,6 +11,8 @@ import AuthProvider from './context/AuthProvider';
 import Services from './layouts/Services';
 import AddServices from './layouts/AddServices';
 import MyServices from './layouts/MyServices';
+import ServiceDetails from './components/ServiceDetails';
+import axiosAPI from './axios/axiosAPI';
 
 const router = createBrowserRouter([
   {
@@ -44,6 +46,15 @@ const router = createBrowserRouter([
       {
         path: "/myServices",
         element: <MyServices></MyServices>,
+      },
+      {
+        path: "/serviceDetails/:id",
+        element: <ServiceDetails></ServiceDetails>,
+        loader: async ({ params }) => {
+          const response = await axiosAPI.get(`/services/${params.id}`)
+          return response.data;
+
+        }
       },
     ],
   },

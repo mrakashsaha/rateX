@@ -1,58 +1,71 @@
-import React from 'react';
+import React from "react";
+// import { Rating } from "react-rating";
 
 const Test = () => {
-      const services = [
-        {
-          id: 1,
-          image: "https://via.placeholder.com/300",
-          title: "Service 1",
-          description: "This is a description of Service 1.",
-          category: "Category A",
-          price: "$99",
-        },
-        {
-          id: 2,
-          image: "https://via.placeholder.com/300",
-          title: "Service 2",
-          description: "This is a description of Service 2.",
-          category: "Category B",
-          price: "$149",
-        },
-        {
-          id: 3,
-          image: "https://via.placeholder.com/300",
-          title: "Service 3",
-          description: "This is a description of Service 3.",
-          category: "Category C",
-          price: "$199",
-        },
-      ];
-    
-      return (
-        <div className="container mx-auto">
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-            {services.map((service) => (
-              <div
-                key={service.id}
-                className="card bg-base-100 shadow-xl hover:scale-[102%] transition-transform duration-300"
-              >
-                <figure>
-                  <img src={service.image} alt={service.title} className="h-48 w-full object-cover" />
-                </figure>
-                <div className="card-body">
-                  <h2 className="card-title text-lg font-bold">{service.title}</h2>
-                  <p className="text-gray-600">{service.description}</p>
-                  <p className="text-sm text-gray-500 mt-2">Category: {service.category}</p>
-                  <p className="text-xl font-semibold text-green-600 mt-4">{service.price}</p>
-                  <div className="card-actions justify-end mt-4">
-                    <button className="btn btn-primary">See Details</button>
-                  </div>
+  return (
+    <div className="container mx-auto px-4 py-8">
+      <div className="flex flex-col md:flex-row items-start gap-6">
+        {/* Service Info */}
+        <div className="w-full md:w-2/3">
+          <img
+            src="https://via.placeholder.com/600"
+            alt="Service Title"
+            className="rounded-lg shadow-md w-full h-64 object-cover"
+          />
+          <h1 className="text-2xl font-bold mt-4">Service Title</h1>
+          <p className="text-gray-600 mt-2">
+            This is a detailed description of the service being provided.
+          </p>
+          <p className="text-sm text-gray-500 mt-2">Category: Example Category</p>
+          <p className="text-xl font-semibold text-green-600 mt-4">$99</p>
+          <p className="text-sm text-gray-500 mt-1">Total Reviews: 10</p>
+        </div>
+
+        {/* Review Section */}
+        <div className="w-full md:w-1/3">
+          <h2 className="text-xl font-semibold mb-4">Add a Review</h2>
+          <textarea
+            placeholder="Write your review..."
+            className="textarea textarea-bordered w-full mb-4"
+          ></textarea>
+          <div className="flex items-center gap-4 mb-4">
+            <span className="text-gray-600">Rating:</span>
+            {/* <Rating className="text-yellow-500" initialRating={0} /> */}
+          </div>
+          <button className="btn btn-primary w-full">Add Review</button>
+        </div>
+      </div>
+
+      {/* Reviews List */}
+      <div className="mt-8">
+        <h2 className="text-xl font-semibold mb-4">Reviews</h2>
+        <div className="space-y-6">
+          {[1, 2, 3].map((review, index) => (
+            <div
+              key={index}
+              className="flex items-start gap-4 bg-base-100 p-4 rounded-lg shadow-md"
+            >
+              <img
+                src="https://via.placeholder.com/40"
+                alt="User"
+                className="rounded-full w-10 h-10"
+              />
+              <div>
+                <h3 className="font-semibold">User Name</h3>
+                <p className="text-sm text-gray-600">
+                  This is a sample review text. It gives feedback about the service.
+                </p>
+                <div className="flex items-center gap-2 mt-2">
+                  {/* <Rating className="text-yellow-500" initialRating={4} readonly /> */}
+                  <span className="text-xs text-gray-500">Posted on: 12/22/2024</span>
                 </div>
               </div>
-            ))}
-          </div>
+            </div>
+          ))}
         </div>
-      );
-    };
+      </div>
+    </div>
+  );
+};
 
 export default Test;
