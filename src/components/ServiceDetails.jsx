@@ -5,19 +5,40 @@ import { AuthContext } from '../context/AuthProvider';
 import { useLoaderData } from "react-router-dom";
 import axiosAPI from "../axios/axiosAPI";
 import moment from "moment";
+import Review from "./Review";
 
 
 const ServiceDetails = () => {
+    let avgRatting = 0;
     const reviewPostdate = moment().format('DD-MM-YYYY, hh:mm  a');
     const { user } = useContext(AuthContext);
     const [rating, setRating] = useState(0);
+    const [reviewsData, setReviewsData] = useState([]);
+    const [countReviews, setCountReviews] = useState(0);
+    const [reFetch, setRefetch] = useState(false);
     const serviceDetails = useLoaderData();
     const { _id, imageURL, title, date, companyName, website, description, category, price } = serviceDetails;
 
-    useEffect (()=> {
+    useEffect(() => {
         axiosAPI.get(`/reviews/${_id}`)
-        .then (res=> console.log (res.data));
-    }, [])
+            .then(res => {
+                setReviewsData(res.data.result);
+                setCountReviews(res.data.countReviews);
+            });
+
+
+    }, [reFetch])
+
+    console.log(reviewsData)
+
+    if (reviewsData.length) {
+        const totalRating = reviewsData.reduce((sum, rating) => sum + rating.rating, 0);
+        const averageRating = totalRating / countReviews;
+        avgRatting = averageRating;
+    }
+
+
+
 
     const handleReview = (e) => {
         e.preventDefault();
@@ -26,12 +47,14 @@ const ServiceDetails = () => {
 
         console.log(reviewDoc)
 
-        axiosAPI.post ("/reviews", reviewDoc)
-        .then (res=> {
-            if (res.data.insertedId) {
-                alert ('Review Posted Sucessfully')
-            }
-        })
+        axiosAPI.post("/reviews", reviewDoc)
+            .then(res => {
+                if (res.data.insertedId) {
+                    setRefetch((alter) => !alter);
+                    alert('Review Posted Sucessfully');
+
+                }
+            })
     }
 
     return (
@@ -57,7 +80,8 @@ const ServiceDetails = () => {
                     <p className="text-sm text-gray-500">Company: {companyName}</p>
                     <p className="text-sm text-gray-500">Posted Date & Time: {date}</p>
                     <p className="text-xl font-semibold text-green-600">Price: ${price}</p>
-                    <p className="text-sm text-gray-500">Total Reviews: 10</p>
+                    <p className="text-sm text-gray-500">Total Reviews: {countReviews}</p>
+                    <Rating style={{ maxWidth: 150 }} value={avgRatting} readOnly />
                 </div>
             </div>
 
@@ -86,32 +110,9 @@ const ServiceDetails = () => {
             <div>
                 <h2 className="text-xl font-semibold mb-4">Previous Reviews</h2>
                 <div className="space-y-6">
-                    {[1, 2, 3].map((review, index) => (
-                        <div
-                            key={index}
-                            className="flex items-start gap-4 bg-base-100 p-4 rounded-lg shadow-md"
-                        >
-                            <img
-                                src="https://via.placeholder.com/40"
-                                alt="User"
-                                className="rounded-full w-10 h-10"
-                            />
-                            <div>
-                                <h3 className="font-semibold">User Name</h3>
-                                <p className="text-sm text-gray-600">
-                                    This is a sample review text. It gives feedback about the service.
-                                </p>
-                                <div className="flex items-center gap-2 mt-2">
-                                    <Rating
-                                        style={{ maxWidth: 100 }}
-                                        value={4}
-                                        readOnly
-                                    />
-                                    <span className="text-xs text-gray-500">Posted on: 12/22/2024</span>
-                                </div>
-                            </div>
-                        </div>
-                    ))}
+                    {
+                        reviewsData.map((review, idx) => <Review key={idx} review={review}></Review>)
+                    }
                 </div>
             </div>
         </div>
