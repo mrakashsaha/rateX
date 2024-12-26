@@ -45,6 +45,7 @@ const MyServices = () => {
                 console.log(res.data);
                 if (res.data.modifiedCount) {
                     setReFetch((alter) => !alter);
+                    document.getElementById('my_modal_5').close();
                 }
             })
             .catch(error => console.log(error))

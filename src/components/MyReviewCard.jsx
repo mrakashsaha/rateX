@@ -1,7 +1,7 @@
 import { Rating } from '@smastrom/react-rating';
 import React from 'react';
 
-const MyReviewCard = ({servicesData, reviewCardData, handleDeleteReview}) => {
+const MyReviewCard = ({servicesData, reviewCardData, handleDeleteReview, openUpdateReviewModal}) => {
     const {_id, serviceId, reviewPostdate, review, rating} = reviewCardData;
     const serviceData = servicesData.find (service=>service._id === serviceId);
     return (
@@ -28,7 +28,7 @@ const MyReviewCard = ({servicesData, reviewCardData, handleDeleteReview}) => {
 
                 {/* Action Buttons */}
                 <div className="flex justify-end gap-4 mt-4 flex-col sm:flex-row">
-                    <button className="btn btn-outline btn-sm">Update</button>
+                    <button onClick={()=>openUpdateReviewModal(_id)} className="btn btn-outline btn-sm">Update</button>
                     <button onClick={()=>handleDeleteReview(_id)} className="btn btn-error btn-sm">Delete</button>
                 </div>
             </div>
