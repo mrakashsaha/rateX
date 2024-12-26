@@ -76,12 +76,15 @@ const ServiceDetails = () => {
                     <p className="text-gray-600">
                         {description}
                     </p>
+                    
+                    <div className="flex items-center gap-x-2">
+                        <p className="text-gray-500">Ratting:</p>
+                    <Rating style={{ maxWidth: 120 }} value={avgRatting} readOnly />
+                    </div>
                     <p className="text-sm text-gray-500">Category: {category}</p>
                     <p className="text-sm text-gray-500">Company: {companyName}</p>
-                    <p className="text-sm text-gray-500">Posted Date & Time: {date}</p>
+                    <p className="text-sm text-gray-500">Posted Date: {date}</p>
                     <p className="text-xl font-semibold text-green-600">Price: ${price}</p>
-                    <p className="text-sm text-gray-500">Total Reviews: {countReviews}</p>
-                    <Rating style={{ maxWidth: 150 }} value={avgRatting} readOnly />
                 </div>
             </div>
 
@@ -108,7 +111,7 @@ const ServiceDetails = () => {
 
             {/* Previous Reviews */}
             <div>
-                <h2 className="text-xl font-semibold mb-4">Previous Reviews</h2>
+                <h2 className="text-xl font-semibold mb-4">Total Reviews: {countReviews}</h2>
                 <div className="space-y-6">
                     {
                         reviewsData.map((review, idx) => <Review key={idx} review={review}></Review>)
