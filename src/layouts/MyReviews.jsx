@@ -3,7 +3,6 @@ import axiosAPI from '../axios/axiosAPI';
 import { AuthContext } from '../context/AuthProvider';
 import MyReviewCard from '../components/MyReviewCard';
 import { Rating } from '@smastrom/react-rating';
-import axios from 'axios';
 import moment from 'moment';
 
 const MyReviews = () => {
@@ -13,7 +12,7 @@ const MyReviews = () => {
     const [servicesData, setServicesData] = useState([]);
     const [formDefaultValue, setFormDefaultValue] = useState(null);
     const [rating, setRating] = useState(0);
- 
+
 
     useEffect(() => {
         axiosAPI.get(`/myreview?email=${user?.email}`)
@@ -34,33 +33,35 @@ const MyReviews = () => {
                     alert('deleted review sucess');
                 }
             });
+
     }
 
     const openUpdateReviewModal = (id) => {
         console.log(id);
         document.getElementById('my_modal_5').showModal();
-        axiosAPI.get (`/review/${id}`)
-        .then (res=> {
-            setFormDefaultValue (res.data);
-            setRating(res.data.rating);
-        });
+        axiosAPI.get(`/review/${id}`)
+            .then(res => {
+                setFormDefaultValue(res.data);
+                setRating(res.data.rating);
+            });
 
     }
 
     const handleUpdateReview = (e) => {
         e.preventDefault();
-        console.log (formDefaultValue._id);
+        console.log(formDefaultValue._id);
         const review = e.target.review.value;
-        const reviewPostdate = moment().format('DD-MM-YYYY, hh:mm  a');
+        const reviewPostdate = moment().toISOString();
 
-        const updateReviewDoc = {review, rating, reviewPostdate}
+        const updateReviewDoc = { review, rating, reviewPostdate }
         axiosAPI.put(`/review/${formDefaultValue._id}`, updateReviewDoc)
-        .then (res=> {
-            if (res.data.modifiedCount) {
-                setReFetch((alter) => !alter);
-                alert ('document updated sucess');
-            }
-        })
+            .then(res => {
+                if (res.data.modifiedCount) {
+                    setReFetch((alter) => !alter);
+                    alert('document updated sucess');
+                    document.getElementById('my_modal_5').close();
+                }
+            })
     }
 
     return (

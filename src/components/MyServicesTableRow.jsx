@@ -1,3 +1,4 @@
+import moment from 'moment';
 import React from 'react';
 
 const MyServicesTableRow = ({ myService, idx, handleDelete, handleUpdate }) => {
@@ -26,7 +27,7 @@ const MyServicesTableRow = ({ myService, idx, handleDelete, handleUpdate }) => {
                     <a href={companyURL} target='_blank' className="font-medium btn-link">{companyName}</a>
                 </td>
                 <td>
-                    <div className="font-medium">{date}</div>
+                    <div className="font-medium">{moment(date).format('DD-MM-YYYY, hh:mm  a')}</div>
                 </td>
                 <td>
                     <button onClick={() => handleUpdate(_id)} className='btn btn-md'>Edit</button>

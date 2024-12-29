@@ -3,7 +3,7 @@ import { IoEye, IoEyeOff } from 'react-icons/io5';
 import { Link, useNavigate } from 'react-router-dom';
 import GoogleLogin from '../components/GoogleLogin';
 import { AuthContext } from '../context/AuthProvider';
-import Swal from 'sweetalert2';
+
 
 const Login = () => {
     const navigate = useNavigate ();
@@ -32,7 +32,7 @@ const Login = () => {
                 setLoading(false);
             })
     }
-
+    
     return (
         <div>
             <div>

@@ -1,4 +1,5 @@
 import { Rating } from '@smastrom/react-rating';
+import moment from 'moment';
 import React from 'react';
 
 const Review = ({review}) => {
@@ -10,7 +11,7 @@ const Review = ({review}) => {
                 <img
                     src={review?.userPhoto}
                     alt="User"
-                    className="rounded-full w-10 h-10"
+                    className="object-cover rounded-full w-10 h-10"
                 />
                 <div>
                     <h3 className="font-semibold">{review?.userName}</h3>
@@ -23,7 +24,7 @@ const Review = ({review}) => {
                             value={review?.rating}
                             readOnly
                         />
-                        <span className="text-xs text-gray-500">Posted on: {review?.reviewPostdate}</span>
+                        <span className="text-xs text-gray-500">Posted on: {moment(review?.reviewPostdate).format('DD-MM-YYYY, hh:mm  a')}</span>
                     </div>
                 </div>
             </div>

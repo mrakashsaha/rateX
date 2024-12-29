@@ -13,11 +13,13 @@ import AddServices from './layouts/AddServices';
 import MyServices from './layouts/MyServices';
 import ServiceDetails from './components/ServiceDetails';
 import axiosAPI from './axios/axiosAPI';
+import ErrorPage from './components/ErrorPage'
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <Root></Root>,
+    // errorElement: <ErrorPage></ErrorPage>,
     children: [
       {
         path: "/",

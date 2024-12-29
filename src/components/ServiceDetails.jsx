@@ -10,7 +10,7 @@ import Review from "./Review";
 
 const ServiceDetails = () => {
     let avgRatting = 0;
-    const reviewPostdate = moment().format('DD-MM-YYYY, hh:mm  a');
+    const reviewPostdate = moment().toISOString();
     const { user } = useContext(AuthContext);
     const [rating, setRating] = useState(0);
     const [reviewsData, setReviewsData] = useState([]);
@@ -24,9 +24,8 @@ const ServiceDetails = () => {
             .then(res => {
                 setReviewsData(res.data.result);
                 setCountReviews(res.data.countReviews);
+
             });
-
-
     }, [reFetch])
 
     console.log(reviewsData)
@@ -55,13 +54,12 @@ const ServiceDetails = () => {
 
                 }
             })
-    }
+     }
 
     return (
         <div className="container mx-auto px-4 py-8 space-y-8">
             {/* Top Section: Service Info */}
             <div className="flex flex-col md:flex-row gap-8">
-                {/* Product Image */}
                 <div className="w-full md:w-1/2">
                     <img
                         src={imageURL}
@@ -76,14 +74,14 @@ const ServiceDetails = () => {
                     <p className="text-gray-600">
                         {description}
                     </p>
-                    
+
                     <div className="flex items-center gap-x-2">
                         <p className="text-gray-500">Ratting:</p>
-                    <Rating style={{ maxWidth: 120 }} value={avgRatting} readOnly />
+                        <Rating style={{ maxWidth: 120 }} value={avgRatting} readOnly />
                     </div>
                     <p className="text-sm text-gray-500">Category: {category}</p>
                     <p className="text-sm text-gray-500">Company: {companyName}</p>
-                    <p className="text-sm text-gray-500">Posted Date: {date}</p>
+                    <p className="text-sm text-gray-500">Posted Date: {moment(date).format('DD-MM-YYYY, hh:mm  a')}</p>
                     <p className="text-xl font-semibold text-green-600">Price: ${price}</p>
                 </div>
             </div>

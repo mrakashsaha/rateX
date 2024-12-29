@@ -2,7 +2,6 @@ import React, { useContext } from 'react';
 import { Link, NavLink, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../context/AuthProvider';
 
-
 const NavBar = () => {
     const navigate = useNavigate();
     const { signOutUser, user, loading } = useContext(AuthContext);
@@ -69,22 +68,22 @@ const NavBar = () => {
                 <div className="navbar-end space-x-3">
                     {
                         loading ? <span className="loading loading-ring loading-lg"></span>
-                        : user ?
-                            <>
-                                <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
-                                    <div className="w-10 rounded-full">
-                                        <img
-                                            alt="Tailwind CSS Navbar component"
-                                            src={user?.photoURL} />
+                            : user ?
+                                <>
+                                    <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
+                                        <div className="w-10 rounded-full">
+                                            <img
+                                                alt="avatar"
+                                                src={user?.photoURL} />
+                                        </div>
                                     </div>
-                                </div>
-                                <button onClick={handleLogout} className="btn">Logout</button>
-                            </>
-                            :
-                            <>
-                                <Link to={"/login"} className="btn">Login</Link>
-                                <Link to={"/register"} className="btn">Register</Link>
-                            </>
+                                    <button onClick={handleLogout} className="btn">Logout</button>
+                                </>
+                                :
+                                <>
+                                    <Link to={"/login"} className="btn">Login</Link>
+                                    <Link to={"/register"} className="btn">Register</Link>
+                                </>
                     }
 
 

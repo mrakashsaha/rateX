@@ -13,12 +13,11 @@ const AddServices = () => {
         // Preparing Data For Post into MongoDB Through API
         const {imageURL,title, companyName, companyURL, description, category, price} = initialData;
         const userEmail = user.email;
-        const date = moment().format('DD-MM-YYYY, hh:mm  a');
+        const date = moment().toISOString();
 
         const serviceDoc = {
             imageURL,title, companyName, companyURL, description, category, price, userEmail, date
         }
-
         axiosAPI.post ("/services", serviceDoc)
         .then (res=> {
             console.log (res.data);
@@ -27,8 +26,6 @@ const AddServices = () => {
             }
         })
         .catch (error => console.log (error.message));
-        
-
     }
 
     return (
@@ -111,10 +108,11 @@ const AddServices = () => {
                         <select required name='category' defaultValue="-- Select Category --" className="select select-bordered rounded-md">
                             <option disabled>-- Select Category --</option>
                             <option value="Cleaning">Cleaning</option>
-                            <option value="IT Services">IT Services</option>
-                            <option value="Fitness">Fitness</option>
                             <option value="Education">Education</option>
+                            <option value="Fitness">Fitness</option>
                             <option value="Healthcare">Healthcare</option>
+                            <option value="IT Services">IT Services</option>
+                            <option value="Transport">Transport</option>
                             <option value="Others">Others</option>
                         </select>
                     </div>

@@ -3,19 +3,34 @@ import axiosAPI from '../axios/axiosAPI';
 import { AuthContext } from '../context/AuthProvider';
 import MyServicesTableRow from '../components/MyServicesTableRow';
 import moment from 'moment';
+import Spinner from '../components/Spinner'
+import Lottie from 'lottie-react';
+import noDataFoundLottie from '../assets/lottie/noDataFound.json'
+import useAxiosSecure from '../axios/UseAxiosSecure';
 
 const MyServices = () => {
-    const { user } = useContext(AuthContext);
+    const { user, loading } = useContext(AuthContext);
+    const [fetch, setFetch] = useState(true);
     const [displayMyServices, setDisplayMyServices] = useState([]);
     const [modalFormValue, setModalFormValue] = useState({});
+    const [query, setQuery] = useState('');
     const [reFetch, setReFetch] = useState(false);
+    const axiosSecure = useAxiosSecure();
+
+    const filterdMyServices = displayMyServices.filter((displayMyService) => displayMyService.title.toLowerCase().includes(query) || displayMyService.category.toLowerCase().includes(query) || displayMyService.companyName.toLowerCase().includes(query));
+
+
 
     useEffect(() => {
-        axiosAPI.get(`/myServices?email=${user?.email}`)
-            .then(res => {
+        if (user) {
+            setFetch(true);
+            axiosSecure.get(`/myServices?email=${user?.email}`)
+                .then(res => {
 
-                setDisplayMyServices(res.data);
-            });
+                    setDisplayMyServices(res.data);
+                    setFetch(false);
+                });
+        }
     }, [user, reFetch])
 
 
@@ -23,7 +38,10 @@ const MyServices = () => {
         console.log(id);
         document.getElementById('my_modal_5').showModal();
         axiosAPI.get(`/services/${id}`)
-            .then(res => setModalFormValue(res.data));
+            .then(res => {
+                setModalFormValue(res.data)
+
+            });
     }
 
     const handleUpdateService = (e) => {
@@ -34,12 +52,11 @@ const MyServices = () => {
         // Preparing Data For Post into MongoDB Through API
         const { imageURL, title, companyName, companyURL, description, category, price } = initialData;
         const userEmail = user.email;
-        const date = moment().format('DD-MM-YYYY, hh:mm  a');
+        const date = moment().toISOString();
 
         const updateServiceDoc = {
             imageURL, title, companyName, companyURL, description, category, price, userEmail, date
         }
-
         axiosAPI.put(`/updateService/${modalFormValue._id}`, updateServiceDoc)
             .then(res => {
                 console.log(res.data);
@@ -49,10 +66,12 @@ const MyServices = () => {
                 }
             })
             .catch(error => console.log(error))
+
     }
 
 
     const handleDelete = (id) => {
+
 
         axiosAPI.delete(`/myServices/${id}`)
             .then(res => {
@@ -60,11 +79,35 @@ const MyServices = () => {
                 setReFetch((alter) => !alter);
             })
             .catch(error => console.log(error))
+
+    }
+
+    if (loading) {
+        return <Spinner></Spinner>
     }
 
     return (
         <div className='container p-2 mx-auto'>
             <h2 className='text-3xl text-center font-bold pb-10'>My Services</h2>
+
+            <div className='flex justify-between py-4'>
+                <div>
+                    <h3 className='text-3xl'>My Services: {displayMyServices.length}</h3>
+                </div>
+                <label className="input input-bordered flex items-center gap-2">
+                    <input onChange={(e) => setQuery(e.target.value.toLowerCase())} type="text" className="grow" placeholder="Search" />
+                    <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 16 16"
+                        fill="currentColor"
+                        className="h-4 w-4 opacity-70">
+                        <path
+                            fillRule="evenodd"
+                            d="M9.965 11.026a5 5 0 1 1 1.06-1.06l2.755 2.754a.75.75 0 1 1-1.06 1.06l-2.755-2.754ZM10.5 7a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0Z"
+                            clipRule="evenodd" />
+                    </svg>
+                </label>
+            </div>
             <div className='bg-base-100 shadow-inherit border'>
                 <div className="overflow-x-auto">
                     <table className="table">
@@ -81,7 +124,7 @@ const MyServices = () => {
                         </thead>
                         <tbody>
                             {
-                                displayMyServices?.map((myService, idx) => <MyServicesTableRow key={idx} idx={idx + 1} myService={myService} handleDelete={handleDelete} handleUpdate={handleUpdate}></MyServicesTableRow>)
+                                filterdMyServices?.map((myService, idx) => <MyServicesTableRow key={idx} idx={idx + 1} myService={myService} handleDelete={handleDelete} handleUpdate={handleUpdate}></MyServicesTableRow>)
                             }
                         </tbody>
                     </table>
@@ -174,10 +217,11 @@ const MyServices = () => {
                                             <select required name='category' defaultValue={modalFormValue.category} className="select select-bordered rounded-md">
                                                 <option disabled>-- Select Category --</option>
                                                 <option value="Cleaning">Cleaning</option>
-                                                <option value="IT Services">IT Services</option>
-                                                <option value="Fitness">Fitness</option>
                                                 <option value="Education">Education</option>
+                                                <option value="Fitness">Fitness</option>
                                                 <option value="Healthcare">Healthcare</option>
+                                                <option value="IT Services">IT Services</option>
+                                                <option value="Transport">Transport</option>
                                                 <option value="Others">Others</option>
                                             </select>
                                         </div>
@@ -215,8 +259,23 @@ const MyServices = () => {
                     </dialog>
                 </div>
             </div>
+
+
+            {
+                !fetch && displayMyServices.length === 0 &&
+                <>
+                    <div className='flex justify-center items-center'>
+                        <div className='w-96 p-4'>
+                            <Lottie animationData={noDataFoundLottie}></Lottie>
+                        </div>
+                    </div>
+                </>
+            }
+
+
         </div>
     );
+
 };
 
 export default MyServices;

@@ -1,4 +1,5 @@
 import { Rating } from '@smastrom/react-rating';
+import moment from 'moment';
 import React from 'react';
 
 const MyReviewCard = ({servicesData, reviewCardData, handleDeleteReview, openUpdateReviewModal}) => {
@@ -22,14 +23,14 @@ const MyReviewCard = ({servicesData, reviewCardData, handleDeleteReview, openUpd
                     </div>
                     {/* Review Posted Date */}
                     <p className="text-sm text-gray-500">
-                        <span className="font-semibold">Review Posted:</span> {reviewPostdate}
+                        <span className="font-semibold">Review Posted:</span> {moment(reviewPostdate).format('DD-MM-YYYY, hh:mm  a')}
                     </p>
                 </div>
 
                 {/* Action Buttons */}
                 <div className="flex justify-end gap-4 mt-4 flex-col sm:flex-row">
-                    <button onClick={()=>openUpdateReviewModal(_id)} className="btn btn-outline btn-sm">Update</button>
-                    <button onClick={()=>handleDeleteReview(_id)} className="btn btn-error btn-sm">Delete</button>
+                    <button onClick={()=>openUpdateReviewModal(_id)} className="btn btn-outline">Update</button>
+                    <button onClick={()=>handleDeleteReview(_id)} className="btn btn-error">Delete</button>
                 </div>
             </div>
         </div>
