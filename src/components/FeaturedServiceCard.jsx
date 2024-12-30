@@ -3,9 +3,9 @@ import { PiBuildingsDuotone, PiBuildingsFill } from 'react-icons/pi';
 import { TbCategoryPlus } from 'react-icons/tb';
 import { Link } from 'react-router-dom';
 
-const ServiceCard = ({ service }) => {
+const FeaturedServiceCard = ({ featuredService }) => {
 
-    const { _id, imageURL, title, description, category, price, companyName } = service;
+    const { _id, imageURL, title, description, category, price, companyName } = featuredService;
     const [isImageLoading, setIsImageLoading] = useState(true);
 
     return (
@@ -38,4 +38,4 @@ const ServiceCard = ({ service }) => {
     );
 };
 
-export default ServiceCard;
+export default FeaturedServiceCard;

@@ -6,6 +6,7 @@ import slider3 from '../assets/sliders/slider_3.png'
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Pagination, Autoplay } from 'swiper/modules';
 import 'swiper/css/bundle';
+import { Link } from 'react-router-dom';
 
 const Slider = () => {
     return (
@@ -43,7 +44,7 @@ const Slider = () => {
                                                 clipRule="evenodd" />
                                         </svg>
                                     </label>
-                                    <button className='btn btn-md bg-[#04B2B2] hover:bg-[#038787] text-white border-none rounded-md px-7'>Search</button>
+                                    <Link to={"/services"} className='btn btn-md bg-[#04B2B2] hover:bg-[#038787] text-white border-none rounded-md px-7'>Search</Link>
                                 </div>
                                 <div className='font-medium flex items-center gap-x-6 mt-10'>
                                     <h4 className='text-white'>Top Services:</h4>
@@ -80,7 +81,7 @@ const Slider = () => {
                                                 clipRule="evenodd" />
                                         </svg>
                                     </label>
-                                    <button className='btn btn-md bg-[#04B2B2] hover:bg-[#038787] text-white border-none rounded-md px-7'>Search</button>
+                                    <Link to={"/services"} className='btn btn-md bg-[#04B2B2] hover:bg-[#038787] text-white border-none rounded-md px-7'>Search</Link>
                                 </div>
                                 <div className='font-medium flex items-center gap-x-6 mt-10'>
                                     <h4 className='text-white md:text-[#151515]'>Top Services:</h4>
@@ -117,7 +118,7 @@ const Slider = () => {
                                                 clipRule="evenodd" />
                                         </svg>
                                     </label>
-                                    <button className='btn btn-md bg-[#04B2B2] hover:bg-[#038787] text-white border-none rounded-md px-7'>Search</button>
+                                    <Link to={"/services"} className='btn btn-md bg-[#04B2B2] hover:bg-[#038787] text-white border-none rounded-md px-7'>Search</Link>
                                 </div>
                                 <div className='font-medium flex items-center gap-x-6 mt-10'>
                                     <h4 className='text-white md:text-[#151515]'>Top Services:</h4>
