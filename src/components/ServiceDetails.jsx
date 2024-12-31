@@ -94,7 +94,7 @@ const ServiceDetails = () => {
                     </div>
 
                     {/* Service Details */}
-                    <div className="w-full md:w-1/2 space-y-4">
+                    <div className="w-full md:w-1/2 space-y-4 px-2">
                         <h1 className="text-3xl font-bold">{title}</h1>
                         <p className="text-gray-600">
                             {description}
