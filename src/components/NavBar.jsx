@@ -30,10 +30,10 @@ const NavBar = () => {
             <li><NavLink to={"/myServices"}>My Services</NavLink></li>
         </>
     return (
-        <div className='mx-auto container'>
-            <div className="navbar bg-base-100">
+        <div className='bg-base-100 sticky w-full z-20'>
+            <div className="navbar container mx-auto">
                 <div className="navbar-start">
-                    <div className="dropdown">
+                    <div className="dropdown ">
                         <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
                             <svg
                                 xmlns="http://www.w3.org/2000/svg"
@@ -50,7 +50,7 @@ const NavBar = () => {
                         </div>
                         <ul
                             tabIndex={0}
-                            className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow">
+                            className="menu menu-md dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow">
                             {
                                 menu
                             }
