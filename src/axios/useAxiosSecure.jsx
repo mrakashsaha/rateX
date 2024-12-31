@@ -29,11 +29,11 @@ const useAxiosSecure = () => {
 
                 if (x) {
                     Swal.fire({
-                        position: "top-end",
+                        position: "center",
                         icon: "error",
                         title: "Unauthorized Access Request!",
                         showConfirmButton: false,
-                        timer: 1500
+                        timer: 2500
                     }).then(() => {
                         navigate("/login"); // Ensure `navigate` is properly imported and defined
                         x = false;
