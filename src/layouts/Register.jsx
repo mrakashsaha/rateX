@@ -5,14 +5,15 @@ import { Link, useNavigate } from 'react-router-dom';
 import GoogleLogin from '../components/GoogleLogin';
 import { AuthContext } from '../context/AuthProvider';
 import { auth } from '../firebase/firebase.init';
+import axiosAPI from '../axios/axiosAPI';
 
 const Register = () => {
     const navigate = useNavigate();
-    const { createAccountWithEmail, updateProfileByEmail, user, setLoading} = useContext(AuthContext);
+    const { createAccountWithEmail, updateProfileByEmail, user, setLoading } = useContext(AuthContext);
 
     const [visiable, setVisiable] = useState(false);
     const [error, seterror] = useState('');
-    console.log (user);
+    console.log(user);
 
     const handleSignUpWithEmail = (e) => {
         e.preventDefault();
@@ -28,11 +29,20 @@ const Register = () => {
                 console.log(user);
                 updateProfileByEmail(name, photo)
                     .then(() => {
-                        console.log (auth.currentUser);
-                        navigate("/")
-
+                        console.log(auth.currentUser);
+                        const userProfile = {
+                            email: auth?.currentUser?.email,
+                            photoURL: auth?.currentUser?.photoURL,
+                            displayName: auth?.currentUser?.displayName,
+                        }
+                        axiosAPI.put("/users", { userProfile })
+                            .then(res => {
+                                if (res.data.acknowledged) {
+                                    navigate("/")
+                                }
+                            })
                     }).catch((error) => {
-                        console.log (error);
+                        console.log(error);
                         setLoading(false);
                     })
             })

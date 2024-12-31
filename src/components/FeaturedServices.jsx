@@ -10,7 +10,7 @@ const FeaturedServices = () => {
     }, [])
     return (
         <div className='container mx-auto'>
-            <div className=' mt-20 mb-10'>
+            <div className=' mt-20 mb-10 text-center'>
                 <h2 className='text-4xl font-semibold'>Featured Services</h2>
                 <h5 className='text-lg my-3'>Explore Our Exclusive Selection of Top-Notch Services</h5>
             </div>

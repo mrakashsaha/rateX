@@ -2,6 +2,7 @@ import React, { useContext } from 'react';
 import { FaGoogle } from 'react-icons/fa';
 import { AuthContext } from '../context/AuthProvider';
 import { useNavigate } from 'react-router-dom';
+import axiosAPI from '../axios/axiosAPI';
 
 const GoogleLogin = () => {
     const navigate = useNavigate();
@@ -11,8 +12,18 @@ const GoogleLogin = () => {
 
         continueWithGoogle()
         .then (result=> {
-            console.log (result.user);
-            navigate("/")
+            console.log (result.user.email);
+            const userProfile = {
+                email: result?.user?.email,
+                photoURL: result?.user?.photoURL,
+                displayName: result?.user?.displayName,
+            }
+            axiosAPI.put("/users", { userProfile })
+                .then(res => {
+                    if (res.data.acknowledged) {
+                        navigate("/")
+                    }
+                })
         })
         .catch (error => {
             console.log (error);
