@@ -11,18 +11,13 @@ const Stats = () => {
             .then(res => setTotalCount(res.data))
     }, [])
 
-    if (!totalCount?.users || !totalCount?.reviews || !totalCount?.services ) {
-        totalCount.users = 0;
-        totalCount.reviews = 0;
-        totalCount.services = 0;
-    }
     return (
         <div className='bg-[#F5F7F9] mt-28'>
             <div className='container p-2 mx-auto rounded-lg grid grid-cols-1 sm:grid-cols-3 gap-10 py-10'>
                 <div className='text-[#151515} text-center space-y-2 md:border-r'>
                     <CountUp
                         start={0}
-                        end={totalCount.users}
+                        end={totalCount.users || 0}
                         duration={5}
                         suffix="+"
                         enableScrollSpy={true}
@@ -34,7 +29,7 @@ const Stats = () => {
                 <div className='text-[#151515} text-center space-y-2 md:border-r'>
                     <CountUp
                         start={0}
-                        end={totalCount.services}
+                        end={totalCount.services || 0}
                         duration={5}
                         suffix="+"
                         enableScrollSpy={true}
@@ -46,7 +41,7 @@ const Stats = () => {
                 <div className='text-[#151515} text-center space-y-2'>
                     <CountUp
                         start={0}
-                        end={totalCount.reviews}
+                        end={totalCount.reviews || 0}
                         duration={5}
                         suffix="+"
                         enableScrollSpy={true}
