@@ -6,10 +6,11 @@ import moment from 'moment';
 import Spinner from '../components/Spinner'
 import Lottie from 'lottie-react';
 import noDataFoundLottie from '../assets/lottie/noDataFound.json'
-import useAxiosSecure from '../axios/UseAxiosSecure';
+
 import { Helmet } from 'react-helmet';
 import Swal from 'sweetalert2';
 import bg1 from '../assets/backgrounds/bg1.jpg'
+import useAxiosSecure from '../axios/useAxiosSecure';
 
 const MyServices = () => {
     const { user, loading } = useContext(AuthContext);

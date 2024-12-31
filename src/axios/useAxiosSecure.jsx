@@ -6,7 +6,6 @@ import Swal from 'sweetalert2';
 
 const useAxiosSecure = () => {
     const { signOutUser, setLoading } = useContext(AuthContext);
-    let x = false;
     const navigate = useNavigate();
     useEffect(() => {
         axiosAPI.interceptors.response.use(response => {
@@ -19,27 +18,21 @@ const useAxiosSecure = () => {
                     signOutUser()
                         .then(() => {
                             setLoading(false);
-                            x = true;
-
                         }).catch((error) => {
                             console.log(error);
                             setLoading(false);
                         });
                 }
 
-                if (x) {
-                    Swal.fire({
-                        position: "center",
-                        icon: "error",
-                        title: "Unauthorized Access Request!",
-                        showConfirmButton: false,
-                        timer: 2500
-                    }).then(() => {
-                        navigate("/login"); // Ensure `navigate` is properly imported and defined
-                        x = false;
-                    });
-                }
-                console.log (x);
+
+                Swal.fire({
+                    icon: "error",
+                    title: "Oops...",
+                    text: "Unauthorized Acess Request!",
+                }).then(() => {
+                    navigate("/login");
+                });
+
                 return Promise.reject(error);
             })
     }, [])
