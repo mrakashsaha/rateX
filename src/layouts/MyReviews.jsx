@@ -8,6 +8,7 @@ import { Helmet } from 'react-helmet';
 import useAxiosSecure from '../axios/UseAxiosSecure';
 import bg4 from '../assets/backgrounds/bg4.jpg'
 import Swal from 'sweetalert2';
+import NoDataInSearch from '../components/NoDataInSearch'
 
 const MyReviews = () => {
     const { user } = useContext(AuthContext);
@@ -103,8 +104,19 @@ const MyReviews = () => {
             <div className="space-y-6 container mx-auto my-20 p-2">
                 {
                     reviewsData.map((reviewCardData, idx) => <MyReviewCard openUpdateReviewModal={openUpdateReviewModal} handleDeleteReview={handleDeleteReview} servicesData={servicesData} reviewCardData={reviewCardData} key={idx}></MyReviewCard>)
+
+                }
+
+                {
+
+                    reviewsData.length === 0 &&
+                    <>
+                        <h2 className='text-3xl text-center'>You have not posted any review yet!</h2>
+                        <NoDataInSearch></NoDataInSearch>
+                    </>
                 }
             </div>
+
             <dialog id="my_modal_5" className="modal modal-bottom sm:modal-middle">
                 <div className="modal-box">
                     <div>

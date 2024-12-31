@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { PiBuildingsDuotone, PiBuildingsFill } from 'react-icons/pi';
+import { PiBuildingsFill } from 'react-icons/pi';
 import { TbCategoryPlus } from 'react-icons/tb';
 import { Link } from 'react-router-dom';
 
