@@ -3,14 +3,12 @@ import { auth } from '../firebase/firebase.init';
 import { createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, signOut, updateProfile } from 'firebase/auth';
 import { GoogleAuthProvider } from 'firebase/auth';
 import axiosAPI from '../axios/axiosAPI';
-import useAxiosSecure from '../axios/UseAxiosSecure';
 
 export const AuthContext = createContext();
 const googleProvider = new GoogleAuthProvider();
 
 const AuthProvider = ({ children }) => {
     const [loading, setLoading] = useState(true);
-
     const [user, setUser] = useState(null);
 
     useEffect(() => {
@@ -19,14 +17,13 @@ const AuthProvider = ({ children }) => {
             if (currentUser?.email) {
                 axiosAPI.post("/jwt", { email: currentUser?.email })
                     .then(res => {
-                        console.log(res.data);
                         setLoading(false);
                     });
             }
             else {
                 axiosAPI.post ("/logout", {})
                 .then (res=> {
-                    console.log ("Logout", res.data)
+                    console.log ("Logout")
                 })
                 setLoading(false);
             }

@@ -2,35 +2,59 @@ import React, { useContext } from 'react';
 import { AuthContext } from '../context/AuthProvider';
 import axiosAPI from '../axios/axiosAPI';
 import moment from 'moment';
+import { Helmet } from 'react-helmet';
+import bg3 from '../assets/backgrounds/bg3.jpg'
+import Swal from 'sweetalert2';
+import { useNavigate } from 'react-router-dom';
+import useAxiosSecure from '../axios/UseAxiosSecure';
 
 const AddServices = () => {
+    const navigate =  useNavigate();
+    const axiosSecure = useAxiosSecure();
     const { user } = useContext(AuthContext);
     const handleAddService = (e) => {
         e.preventDefault();
         const formData = new FormData(e.target);
         const initialData = Object.fromEntries(formData.entries());
-        
+
         // Preparing Data For Post into MongoDB Through API
-        const {imageURL,title, companyName, companyURL, description, category, price} = initialData;
+        const { imageURL, title, companyName, companyURL, description, category, price } = initialData;
         const userEmail = user.email;
         const date = moment().toISOString();
 
         const serviceDoc = {
-            imageURL,title, companyName, companyURL, description, category, price, userEmail, date
+            imageURL, title, companyName, companyURL, description, category, price, userEmail, date
         }
-        axiosAPI.post ("/services", serviceDoc)
-        .then (res=> {
-            console.log (res.data);
-            if (res.data.insertedId) {
-                alert ('Data Inserted Sucessfully');
-            }
-        })
-        .catch (error => console.log (error.message));
+        axiosSecure.post("/services", serviceDoc)
+            .then(res => {
+                if (res.data.insertedId) {
+                    Swal.fire({
+                        position: "top-end",
+                        icon: "success",
+                        title: "Service is Added Sucessfully!",
+                        showConfirmButton: false,
+                        timer: 1500
+                    });
+                    navigate("/myServices");
+                }
+            })
+            .catch(error => console.log(error.message));
     }
 
     return (
         <div>
-            <div className="my-10">
+            <Helmet>
+                <title>RateX | Add Services</title>
+            </Helmet>
+            <div className="relative h-52 lg:h-60 bg-no-repeat object-fill" style={{ backgroundImage: `url(${bg3})` }}>
+                <div className="absolute inset-0 bg-black/10 flex flex-col justify-center p-16 text-white">
+                    <div className='mx-auto container'>
+                        <p className="text-sm font-light p-2">RateX / Add Service</p>
+                        <h1 className="text-4xl font-bold">Add a New Service</h1>
+                    </div>
+                </div>
+            </div>
+            <div className="mt-10 mb-20 md:mb-28 p-2">
                 <form onSubmit={handleAddService} className="card-body bg-base-100 drop-shadow-lg max-w-5xl mx-auto">
                     {/* Service Image */}
                     <div className="form-control">
@@ -126,14 +150,14 @@ const AddServices = () => {
                             name='price'
                             type="number"
                             className="input input-bordered rounded-md"
-                            placeholder="Enter Price"
+                            placeholder="Enter Price in USD"
                             required
                         />
                     </div>
 
                     {/* Submit Button */}
                     <div className="form-control py-2">
-                        <input className='btn btn-primary' type="submit" value="Add Service" />
+                        <input className='btn-md btn bg-[#04B2B2] hover:bg-[#038787] text-white' type="submit" value="Add Service" />
                     </div>
                 </form>
             </div>

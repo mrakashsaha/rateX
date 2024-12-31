@@ -14,6 +14,7 @@ import MyServices from './layouts/MyServices';
 import ServiceDetails from './components/ServiceDetails';
 import axiosAPI from './axios/axiosAPI';
 import ErrorPage from './components/ErrorPage'
+import PrivateRouter from './layouts/PrivateRouter';
 
 const router = createBrowserRouter([
   {
@@ -39,19 +40,19 @@ const router = createBrowserRouter([
       },
       {
         path: "/addServices",
-        element: <AddServices></AddServices>
+        element: <PrivateRouter><AddServices></AddServices></PrivateRouter>
       },
       {
         path: "/myReviews",
-        element: <MyReviews></MyReviews>,
+        element: <PrivateRouter><MyReviews></MyReviews></PrivateRouter>,
       },
       {
         path: "/myServices",
-        element: <MyServices></MyServices>,
+        element: <PrivateRouter><MyServices></MyServices></PrivateRouter>,
       },
       {
         path: "/serviceDetails/:id",
-        element: <ServiceDetails></ServiceDetails>,
+        element: <PrivateRouter><ServiceDetails></ServiceDetails></PrivateRouter>,
         loader: async ({ params }) => {
           const response = await axiosAPI.get(`/services/${params.id}`)
           return response.data;

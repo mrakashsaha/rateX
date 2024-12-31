@@ -6,6 +6,7 @@ import Footer from './components/Footer';
 
 const Root = () => {
 
+
     return (
         <div>
             <NavBar></NavBar>

@@ -1,27 +1,38 @@
 import React, { useContext, useState } from 'react';
-import { FaGoogle } from 'react-icons/fa';
 import { IoEye, IoEyeOff } from 'react-icons/io5';
 import { Link, useNavigate } from 'react-router-dom';
 import GoogleLogin from '../components/GoogleLogin';
 import { AuthContext } from '../context/AuthProvider';
 import { auth } from '../firebase/firebase.init';
 import axiosAPI from '../axios/axiosAPI';
+import { Helmet } from 'react-helmet';
+import registerAnimate from '../assets/lottie/registerAnimate.json'
+import Lottie from 'lottie-react';
 
 const Register = () => {
     const navigate = useNavigate();
     const { createAccountWithEmail, updateProfileByEmail, user, setLoading } = useContext(AuthContext);
 
     const [visiable, setVisiable] = useState(false);
-    const [error, seterror] = useState('');
+    const [formError, setFormError] = useState("");
     console.log(user);
 
     const handleSignUpWithEmail = (e) => {
         e.preventDefault();
+        setFormError("");
         const formData = new FormData(e.target);
         const initialData = Object.fromEntries(formData.entries());
         console.log(initialData);
 
+        const regex = /^(?=.*[A-Z])(?=.*[a-z]).{6,}$/;
+
+        if (!regex.test(initialData.password)) {
+            setFormError("Password must contain uppercase, lowercase and at least 6 characters long");
+            return;
+        }
+
         const { name, email, password, photo } = initialData;
+
 
         createAccountWithEmail(email, password)
             .then((userCredential) => {
@@ -47,9 +58,8 @@ const Register = () => {
                     })
             })
             .catch((error) => {
-                const errorCode = error.code;
-                const errorMessage = error.message;
-                console.log(errorCode)
+                setFormError(error.code);
+                setLoading(false)
             });
 
 
@@ -57,11 +67,19 @@ const Register = () => {
 
     return (
         <div>
+            <Helmet>
+                <title>RateX | Register</title>
+            </Helmet>
             <div>
-                <div className="hero bg-base-200 min-h-screen">
-                    <div className="hero-content flex-col">
-                        <h1 className="text-2xl font-bold  mx-auto">Sign Up Today!</h1>
-                        <div className="card bg-base-100 w-96 shrink-0 shadow-2xl">
+                <div className="hero bg-[#eef7f7] min-h-screen py-10">
+                    <div className="hero-content flex-col md:gap-28 md:flex-row">
+                        <div>
+                            <div className='max-w-xs md:max-w-md'>
+                                <Lottie animationData={registerAnimate}></Lottie>
+                            </div>
+                        </div>
+                        <div className="card bg-base-100 w-96 sm:w-[425px] md:w-[480px] shrink-0 shadow-2xl">
+                            <h1 className="text-2xl text-center font-bold  mx-auto pt-8">Sign Up Today!</h1>
                             <div className='card-body'>
                                 <form onSubmit={handleSignUpWithEmail}>
                                     <div className="form-control">
@@ -80,27 +98,27 @@ const Register = () => {
                                         <label className="label">
                                             <span className="">Photo URL</span>
                                         </label>
-                                        <input name='photo' type="text" placeholder="Enter Photo URL" className="input input-bordered" required />
+                                        <input name='photo' type="url" placeholder="Enter Photo URL" className="input input-bordered" required />
                                     </div>
                                     <div className="form-control relative">
                                         <label className="label">
                                             <span className="">Password</span>
                                         </label>
-                                        <input name='password' type={visiable ? "text" : "password"} placeholder="Enter Password" className="input input-bordered" required />
+                                        <input name='password' type={visiable ? "text" : "password"} placeholder="Create Password" className="input input-bordered" required />
                                         <a onClick={() => setVisiable(!visiable)} className='btn btn-sm btn-circle absolute right-2 top-12' > {visiable ? <IoEyeOff className='text-lg'></IoEyeOff> : <IoEye className='text-lg'></IoEye>}  </a>
                                     </div>
 
                                     {
-                                        error && <p className='text-[#EA4335] text-sm pt-2'>Error: Password must contain uppercase, lowercase and at least 6 characters long.</p>
+                                        formError && <p className='text-[#EA4335] text-base pt-2'>Error: {formError} </p>
                                     }
                                     <div className="form-control mt-4">
-                                        <button className="btn btn-primary text-white border-none hover:bg-[#ff8900] bg-[#04335E]">Sign Up</button>
+                                        <button className="btn bg-[#04B2B2] hover:bg-[#038787] text-white">Sign Up</button>
                                     </div>
                                 </form>
                                 <div className='border-t border-1 border-blue-600 border-dotted mt-4'></div>
                                 <GoogleLogin></GoogleLogin>
                                 <label className="label">
-                                    <p>Already have an Account? <Link to={'/login'} className='underline text-[#EA4335]'>Login</Link> </p>
+                                    <p>Already have an Account? <Link to={'/login'} className='underline text-[#04B2B2] font-semibold'>Login</Link> </p>
                                 </label>
                             </div>
                         </div>

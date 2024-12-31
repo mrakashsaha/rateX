@@ -9,7 +9,6 @@ const NavBar = () => {
     const handleLogout = () => {
         signOutUser()
             .then(() => {
-                console.log('signout sucessfull');
                 navigate("/login")
 
             }).catch((error) => {
@@ -23,11 +22,15 @@ const NavBar = () => {
 
     const menu =
         <>
-            <li><NavLink to={"/"}>Home</NavLink></li>
-            <li><NavLink to={"/services"}>Services</NavLink></li>
-            <li><NavLink to={"/addServices"}>Add Service</NavLink></li>
-            <li><NavLink to={"/myReviews"}>My Reviews</NavLink></li>
-            <li><NavLink to={"/myServices"}>My Services</NavLink></li>
+            <li className='text-lg font-medium'><NavLink to={"/"}>Home</NavLink></li>
+            <li className='text-lg font-medium'><NavLink to={"/services"}>Services</NavLink></li>
+            {
+                user && <>
+                    <li className='text-lg font-medium'><NavLink to={"/addServices"}>Add Service</NavLink></li>
+                    <li className='text-lg font-medium'><NavLink to={"/myReviews"}>My Reviews</NavLink></li>
+                    <li className='text-lg font-medium'><NavLink to={"/myServices"}>My Services</NavLink></li>
+                </>
+            }
         </>
     return (
         <div className='bg-base-100 sticky w-full z-20'>
@@ -50,16 +53,16 @@ const NavBar = () => {
                         </div>
                         <ul
                             tabIndex={0}
-                            className="menu menu-md dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow">
+                            className="menu space-y-2 menu-md dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow">
                             {
                                 menu
                             }
                         </ul>
                     </div>
-                    <a className="btn btn-ghost text-xl">RateX</a>
+                    <a className="btn btn-ghost text-2xl font-semibold">RateX</a>
                 </div>
                 <div className="navbar-center hidden lg:flex">
-                    <ul className="menu menu-horizontal px-1">
+                    <ul className="menu menu-horizontal px-1 space-x-2">
                         {
                             menu
                         }
@@ -77,12 +80,12 @@ const NavBar = () => {
                                                 src={user?.photoURL} />
                                         </div>
                                     </div>
-                                    <button onClick={handleLogout} className="btn">Logout</button>
+                                    <button onClick={handleLogout} className="btn text-base px-4 bg-[#04B2B2] hover:bg-[#038787] text-white">Logout</button>
                                 </>
                                 :
                                 <>
-                                    <Link to={"/login"} className="btn">Login</Link>
-                                    <Link to={"/register"} className="btn">Register</Link>
+                                    <Link to={"/login"} className="btn text-base px-4 bg-[#04B2B2] hover:bg-[#038787] text-white">Login</Link>
+                                    <Link to={"/register"} className="btn text-base px-4">Register</Link>
                                 </>
                     }
 

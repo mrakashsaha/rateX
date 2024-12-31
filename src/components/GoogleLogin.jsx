@@ -1,18 +1,19 @@
 import React, { useContext } from 'react';
 import { FaGoogle } from 'react-icons/fa';
 import { AuthContext } from '../context/AuthProvider';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import axiosAPI from '../axios/axiosAPI';
 
 const GoogleLogin = () => {
     const navigate = useNavigate();
+    const location = useLocation();
     const {continueWithGoogle, setLoading} = useContext (AuthContext);
 
     const handleSignUpWithGoogle = () => {
 
         continueWithGoogle()
         .then (result=> {
-            console.log (result.user.email);
+            
             const userProfile = {
                 email: result?.user?.email,
                 photoURL: result?.user?.photoURL,
@@ -21,7 +22,8 @@ const GoogleLogin = () => {
             axiosAPI.put("/users", { userProfile })
                 .then(res => {
                     if (res.data.acknowledged) {
-                        navigate("/")
+                        // navigate("/")
+                        navigate(location?.state ? location.state : "/");
                     }
                 })
         })
@@ -35,7 +37,7 @@ const GoogleLogin = () => {
     return (
         <div>
             <div className="form-control mt-2">
-                <button onClick={handleSignUpWithGoogle} className="btn btn-primary hover:bg-[#b9362a] bg-[#EA4335] text-white border-none"> <FaGoogle></FaGoogle> Sign Up with Google</button>
+                <button onClick={handleSignUpWithGoogle} className="btn border-[#04B2B2] bg-[#eef7f7] text-[#151515] hover:bg-[#038787] hover:text-white"> <FaGoogle></FaGoogle> Sign Up with Google</button>
             </div>
         </div>
     );

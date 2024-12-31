@@ -3,8 +3,6 @@ import moment from 'moment';
 import React from 'react';
 
 const Review = ({review}) => {
-    console.log (review)
-
     return (
         <div>
             <div className="flex items-start gap-4 bg-base-100 p-4 rounded-lg shadow-md">

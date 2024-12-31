@@ -11,13 +11,12 @@ const Stats = () => {
             .then(res => setTotalCount(res.data))
     }, [])
 
-    console.log(totalCount);
     if (!totalCount?.users || !totalCount?.reviews || !totalCount?.services ) {
         return <Spinner></Spinner>
     }
     return (
-        <div className=' my-10'>
-            <div className=' bg-[#FAF7F1] container p-2 mx-auto rounded-lg grid grid-cols-1 md:grid-cols-3 gap-10 py-10'>
+        <div className='bg-[#F5F7F9] mt-28'>
+            <div className='container p-2 mx-auto rounded-lg grid grid-cols-1 sm:grid-cols-3 gap-10 py-10'>
                 <div className='text-[#151515} text-center space-y-2 md:border-r'>
                     <CountUp
                         start={0}
@@ -42,7 +41,7 @@ const Stats = () => {
                     />
                     <h4 className='text-xl font-medium'>Total Services</h4>
                 </div>
-                <div className='text-[#151515} text-center space-y-2 md:border-r'>
+                <div className='text-[#151515} text-center space-y-2'>
                     <CountUp
                         start={0}
                         end={totalCount.reviews}

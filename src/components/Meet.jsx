@@ -81,10 +81,10 @@ const Meet = () => {
     ];
 
     return (
-        <div className='mx-auto container'>
-            <div className='mt-20 mb-10 text-center'>
-                <h2 className='text-4xl font-semibold'>Meet Our Partners</h2>
-                <h5 className='text-lg my-3'>Partnering with industry leaders for excellence...</h5>
+        <div className='mx-auto container mb-20'>
+            <div className='text-center mb-10'>
+                <h2 className='text-3xl md:text-4xl font-semibold'>Meet Our Partners</h2>
+                <h5 className='text-base md:text-lg my-3'>Partnering with industry leaders for excellence...</h5>
             </div>
             <Swiper
                 pagination={{
