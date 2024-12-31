@@ -12,7 +12,9 @@ const Stats = () => {
     }, [])
 
     if (!totalCount?.users || !totalCount?.reviews || !totalCount?.services ) {
-        return <Spinner></Spinner>
+        totalCount.users = 0;
+        totalCount.reviews = 0;
+        totalCount.services = 0;
     }
     return (
         <div className='bg-[#F5F7F9] mt-28'>

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axiosAPI from '../axios/axiosAPI';
 import FeaturedServiceCard from './FeaturedServiceCard';
+import NoDataInSearch from '../components/NoDataInSearch'
 
 const FeaturedServices = () => {
     const [displayFeaturedServices, setDispalyFeaturedServices] = useState([]);
@@ -19,6 +20,9 @@ const FeaturedServices = () => {
                     displayFeaturedServices.map((featuredService, idx) => <FeaturedServiceCard key={idx} featuredService={featuredService} ></FeaturedServiceCard>)
                 }
             </div>
+                {
+                    displayFeaturedServices.length === 0 && <NoDataInSearch></NoDataInSearch>
+                }
         </div>
     );
 };
