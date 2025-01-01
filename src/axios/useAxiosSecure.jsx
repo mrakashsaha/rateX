@@ -28,7 +28,7 @@ const useAxiosSecure = () => {
                 Swal.fire({
                     icon: "error",
                     title: "Oops...",
-                    text: "Unauthorized Acess Request!",
+                    text: "Unauthorized Access Request!",
                 }).then(() => {
                     navigate("/login");
                 });

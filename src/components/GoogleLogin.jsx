@@ -37,7 +37,7 @@ const GoogleLogin = () => {
     return (
         <div>
             <div className="form-control mt-2">
-                <button onClick={handleSignUpWithGoogle} className="btn border-[#04B2B2] bg-[#eef7f7] text-[#151515] hover:bg-[#038787] hover:text-white"> <FaGoogle></FaGoogle> Sign Up with Google</button>
+                <button onClick={handleSignUpWithGoogle} className="btn border-[#04B2B2] bg-[#eef7f7] text-[#151515] hover:bg-[#038787] hover:text-white"> <FaGoogle></FaGoogle> Continue with Google</button>
             </div>
         </div>
     );
