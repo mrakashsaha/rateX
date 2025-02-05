@@ -1,5 +1,5 @@
 # RateX
-![RateX Screenshot](https://raw.githubusercontent.com/mrakashsaha/rateX/refs/heads/main/public/RateXSS.png)  
+![RateX Screenshot](https://raw.githubusercontent.com/mrakashsaha/rateX/refs/heads/main/public/RateX-SS.png)  
 
 ## Overview
 RateX is a comprehensive service review platform that allows users to share their experiences with various services. Users can post reviews, manage their own reviews, and explore feedback from others. The platform includes user authentication, interactive features, and a responsive design for a seamless experience.
