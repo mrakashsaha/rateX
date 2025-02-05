@@ -1,4 +1,4 @@
-# RateX
+# RateX - Service Review Platform 
 ![RateX Screenshot](https://raw.githubusercontent.com/mrakashsaha/rateX/refs/heads/main/public/RateX-SS.png)  
 
 ## Overview
