@@ -2,13 +2,22 @@ import React, { useEffect, useState } from 'react';
 import axiosAPI from '../axios/axiosAPI';
 import FeaturedServiceCard from './FeaturedServiceCard';
 import NoDataInSearch from '../components/NoDataInSearch'
+import Spinner from './Spinner';
 
 const FeaturedServices = () => {
+    const [loading, setLoaing] = useState(true);
     const [displayFeaturedServices, setDispalyFeaturedServices] = useState([]);
     useEffect(() => {
         axiosAPI.get("/featuredServices")
-            .then(res => setDispalyFeaturedServices(res.data));
+            .then(res => {
+                setDispalyFeaturedServices(res.data)
+                setLoaing(false)
+            });
     }, [])
+
+    if (loading) {
+        return <Spinner></Spinner>
+    }
     return (
         <div className='container mx-auto'>
             <div className=' mt-20 mb-10 text-center'>

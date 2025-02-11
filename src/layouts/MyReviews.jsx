@@ -9,9 +9,11 @@ import useAxiosSecure from '../axios/UseAxiosSecure';
 import bg4 from '../assets/backgrounds/bg4.jpg'
 import Swal from 'sweetalert2';
 import NoDataInSearch from '../components/NoDataInSearch'
+import Spinner from '../components/Spinner';
 
 const MyReviews = () => {
     const { user } = useContext(AuthContext);
+    const [loading, setLoaing] = useState(true);
     const [reFetch, setReFetch] = useState(false);
     const [reviewsData, setReviewsData] = useState([]);
     const [servicesData, setServicesData] = useState([]);
@@ -25,6 +27,7 @@ const MyReviews = () => {
             .then(res => {
                 setReviewsData(res.data.myReviews);
                 setServicesData(res.data.servicesInfo);
+                setLoaing(false);
             })
     }, [user, reFetch])
 
@@ -88,6 +91,9 @@ const MyReviews = () => {
             })
     }
 
+    if (loading) {
+        return <Spinner></Spinner>
+    }
     return (
         <div className=''>
             <Helmet>

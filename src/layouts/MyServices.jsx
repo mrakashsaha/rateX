@@ -10,10 +10,11 @@ import noDataFoundLottie from '../assets/lottie/noDataFound.json'
 import { Helmet } from 'react-helmet';
 import Swal from 'sweetalert2';
 import bg1 from '../assets/backgrounds/bg1.jpg'
-import useAxiosSecure from '../axios/useAxiosSecure';
+import useAxiosSecure from '../axios/UseAxiosSecure';
 
 const MyServices = () => {
-    const { user, loading } = useContext(AuthContext);
+    const { user, loading} = useContext(AuthContext);
+    const [dataLoading, setDataLoaing] = useState(true);
     const [fetch, setFetch] = useState(true);
     const [displayMyServices, setDisplayMyServices] = useState([]);
     const [modalFormValue, setModalFormValue] = useState({});
@@ -33,6 +34,7 @@ const MyServices = () => {
 
                     setDisplayMyServices(res.data);
                     setFetch(false);
+                    setDataLoaing(false);
                 });
         }
     }, [user, reFetch])
@@ -112,7 +114,7 @@ const MyServices = () => {
 
     }
 
-    if (loading) {
+    if (loading || dataLoading) {
         return <Spinner></Spinner>
     }
 
