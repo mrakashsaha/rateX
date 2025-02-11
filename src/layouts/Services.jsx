@@ -120,7 +120,7 @@ const Services = () => {
                     </form>
                     <div className='flex gap-x-4 items-center'>
                         <div>
-                            <button onClick={handleSortbyPrice} className='btn'>Sort By Price{ascending === false ? <FaSortAmountUp></FaSortAmountUp> : ascending === true ? <FaSortAmountDown></FaSortAmountDown> : <RxCaretSort className='text-xl'></RxCaretSort>} </button>
+                            <button onClick={handleSortbyPrice} className='btn border-2 border-[#04B2B2] hover:border-none hover:bg-[#038787] btn-outline'>Sort By Price{ascending === false ? <FaSortAmountUp></FaSortAmountUp> : ascending === true ? <FaSortAmountDown></FaSortAmountDown> : <RxCaretSort className='text-xl'></RxCaretSort>} </button>
                         </div>
                         <div>
                             <div className="dropdown dropdown-bottom dropdown-end">
