@@ -5,9 +5,10 @@ import { FiFilter } from 'react-icons/fi';
 import { Helmet } from 'react-helmet';
 import bg1 from '../assets/backgrounds/bg1.jpg'
 import NoDataInSearch from '../components/NoDataInSearch';
+import Spinner from '../components/Spinner';
 
 const Services = () => {
-
+    const [loading, setLoaing] = useState(true);
     const [services, setServices] = useState([]);
     const [refetech, setReFetch] = useState(false);
     const [displayCategoryName, setDisplayCategoryName] = useState("All");
@@ -15,10 +16,14 @@ const Services = () => {
     useEffect(() => {
         axiosAPI.get("/services")
             .then(res => {
-                setServices(res.data)
-                setDisplayCategoryName("All")
+                setServices(res.data);
+                setDisplayCategoryName("All");
+                setLoaing(false);
             })
-            .catch(error => console.log(error));
+            .catch(error => {
+                console.log(error);
+                setLoaing(false);
+            });
     }, [refetech])
 
     const handleCategory = (categoryName) => {
@@ -26,9 +31,13 @@ const Services = () => {
             .then(res => {
                 setServices(res.data);
                 setDisplayCategoryName(categoryName);
+                setLoaing(false);
 
             })
-            .catch(error => console.log(error))
+            .catch(error => {
+                console.log(error)
+                setLoaing(false);
+            })
     }
 
 
@@ -37,8 +46,20 @@ const Services = () => {
         setDisplayCategoryName("All");
         const keyWords = e.target.keyWords.value;
         axiosAPI.get(`/search?keywords=${keyWords}`)
-            .then(res => setServices(res.data))
-            .catch(error => console.log(error))
+            .then(res => {
+                setServices(res.data);
+                setLoaing(false);
+
+            })
+            .catch(error => {
+                console.log(error);
+                setLoaing(false);
+            })
+    }
+
+
+    if (loading) {
+        return <Spinner></Spinner>
     }
 
     return (
