@@ -6,9 +6,13 @@ import { Helmet } from 'react-helmet';
 import bg1 from '../assets/backgrounds/bg1.jpg'
 import NoDataInSearch from '../components/NoDataInSearch';
 import Spinner from '../components/Spinner';
+import { FaArrowDownShortWide, FaArrowUpShortWide } from 'react-icons/fa6';
+import { FaSortAmountDown, FaSortAmountUp } from 'react-icons/fa';
+import { RxCaretSort } from 'react-icons/rx';
 
 const Services = () => {
     const [loading, setLoaing] = useState(true);
+    const [ascending, setAscending] = useState(null);
     const [services, setServices] = useState([]);
     const [refetech, setReFetch] = useState(false);
     const [displayCategoryName, setDisplayCategoryName] = useState("All");
@@ -57,6 +61,31 @@ const Services = () => {
             })
     }
 
+    const handleSortbyPrice = () => {
+        if (ascending === null) {
+            setAscending(true);
+            console.log("soto theke boro sajao");
+            const sortinAscending = services.sort((a, b) => a.price - b.price);
+            setServices(sortinAscending);
+
+        }
+
+        if (ascending === true) {
+            setAscending(false);
+            console.log("boro theke soto sajao");
+            const sortinDescending = services.sort((a, b) =>b.price - a.price );
+            setServices(sortinDescending);
+        }
+
+        if (ascending === false) {
+            setAscending(true);
+            console.log("soto theke boro sajao")
+            const sortinAscending = services.sort((a, b) => a.price - b.price);
+            setServices(sortinAscending);
+        }
+
+    }
+
 
     if (loading) {
         return <Spinner></Spinner>
@@ -76,7 +105,7 @@ const Services = () => {
                 </div>
             </div>
             <div className='container mx-auto px-2'>
-                <div className='flex justify-between items-center my-10'>
+                <div className='flex flex-col md:flex-row justify-between gap-4 items-center my-10'>
                     <form onSubmit={handleSearch}>
                         <div className="join">
                             <div>
@@ -89,21 +118,27 @@ const Services = () => {
                             </div>
                         </div>
                     </form>
-                    <div>
-                        <div className="dropdown dropdown-bottom dropdown-end">
-                            <div tabIndex={0} role="button" className="btn m-1 bg-[#04B2B2] hover:bg-[#038787] text-white"> <FiFilter className='hidden sm:block'></FiFilter> Category : {displayCategoryName} </div>
-                            <ul tabIndex={0} className="dropdown-content menu bg-base-100 rounded-box z-[1] p-2 shadow">
-                                <li><button onClick={() => setReFetch((alter) => !alter)} >All</button> </li>
-                                <li><button onClick={() => handleCategory("Cleaning")} >Cleaning</button> </li>
-                                <li><button onClick={() => handleCategory("Education")} >Education</button> </li>
-                                <li><button onClick={() => handleCategory("Fitness")} >Fitness</button> </li>
-                                <li><button onClick={() => handleCategory("Healthcare")} >Healthcare</button> </li>
-                                <li><button onClick={() => handleCategory("IT Services")} >IT Services</button> </li>
-                                <li><button onClick={() => handleCategory("Transport")} >Transport</button> </li>
-                                <li><button onClick={() => handleCategory("Others")} >Others</button> </li>
-                            </ul>
+                    <div className='flex gap-x-4 items-center'>
+                        <div>
+                            <button onClick={handleSortbyPrice} className='btn'>Sort By Price{ascending === false ? <FaSortAmountUp></FaSortAmountUp> : ascending === true ? <FaSortAmountDown></FaSortAmountDown> : <RxCaretSort className='text-xl'></RxCaretSort>} </button>
+                        </div>
+                        <div>
+                            <div className="dropdown dropdown-bottom dropdown-end">
+                                <div tabIndex={0} role="button" className="btn m-1 bg-[#04B2B2] hover:bg-[#038787] text-white"> <FiFilter className='hidden sm:block'></FiFilter> Category : {displayCategoryName} </div>
+                                <ul tabIndex={0} className="dropdown-content menu bg-base-100 rounded-box z-[1] p-2 shadow">
+                                    <li><button onClick={() => setReFetch((alter) => !alter)} >All</button> </li>
+                                    <li><button onClick={() => handleCategory("Cleaning")} >Cleaning</button> </li>
+                                    <li><button onClick={() => handleCategory("Education")} >Education</button> </li>
+                                    <li><button onClick={() => handleCategory("Fitness")} >Fitness</button> </li>
+                                    <li><button onClick={() => handleCategory("Healthcare")} >Healthcare</button> </li>
+                                    <li><button onClick={() => handleCategory("IT Services")} >IT Services</button> </li>
+                                    <li><button onClick={() => handleCategory("Transport")} >Transport</button> </li>
+                                    <li><button onClick={() => handleCategory("Others")} >Others</button> </li>
+                                </ul>
+                            </div>
                         </div>
                     </div>
+
                 </div>
                 <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6'>
                     {
