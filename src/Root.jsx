@@ -1,10 +1,14 @@
-import React, { useContext } from 'react';
+import React, { useLayoutEffect } from 'react';
 import NavBar from './components/NavBar';
-import { Outlet } from 'react-router-dom';
+import { Outlet, useLocation } from 'react-router-dom';
 import Footer from './components/Footer';
 
 
 const Root = () => {
+    const location = useLocation();
+    useLayoutEffect(() => {
+        document.documentElement.scrollTo({ top:0, left:0, behavior: "instant" });
+    }, [location.pathname]);
 
 
     return (
