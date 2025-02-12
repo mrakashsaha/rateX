@@ -10,7 +10,7 @@ const ServiceCard = ({ service }) => {
 
     return (
         <div>
-            <div className="card bg-base-100 shadow-xl">
+            <div className="card h-full bg-base-100 shadow-xl">
                 <figure>
                     {isImageLoading && (
                         <div className="absolute">
@@ -27,8 +27,8 @@ const ServiceCard = ({ service }) => {
                             <span className=" gap-2 flex items-center text-sm text-gray-500"><TbCategoryPlus className="text-xl" ></TbCategoryPlus>{category}</span>
                         </div>
                     </div>
-                    <h2 className="card-title text-lg font-bold line-clamp-1">{title}</h2>
-                    <p className="text-gray-600  line-clamp-2">{description}</p>
+                    <h2 className="card-title text-lg font-bold">{title}</h2>
+                    <p className="text-gray-600 line-clamp-2">{description}</p>
                     <div className="card-actions justify-end mt-2">
                         <Link to={`/serviceDetails/${_id}`} className="btn bg-[#04B2B2] hover:bg-[#038787] text-white w-full">See Details</Link>
                     </div>

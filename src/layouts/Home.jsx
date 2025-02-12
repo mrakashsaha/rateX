@@ -5,6 +5,7 @@ import Experience from '../components/Experience';
 import Meet from '../components/Meet';
 import Stats from '../components/Stats';
 import { Helmet } from 'react-helmet';
+import Hero from '../components/Hero';
 
 
 
@@ -16,7 +17,8 @@ const Home = () => {
             <Helmet>
                 <title>RateX | Home</title>
             </Helmet>
-            <Slider></Slider>
+            {/* <Slider></Slider> */}
+            <Hero></Hero>
             <FeaturedServices></FeaturedServices>
             <Stats></Stats>
             <Experience></Experience>

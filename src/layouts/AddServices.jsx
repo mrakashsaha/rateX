@@ -46,7 +46,7 @@ const AddServices = () => {
             <Helmet>
                 <title>RateX | Add Services</title>
             </Helmet>
-            <div className="relative h-52 lg:h-60 bg-no-repeat object-fill" style={{ backgroundImage: `url(${bg3})` }}>
+            <div className="relative h-52 lg:h-60 bg-cover" style={{ backgroundImage: `url(${bg3})` }}>
                 <div className="absolute inset-0 bg-black/10 flex flex-col justify-center p-16 text-white">
                     <div className='mx-auto container'>
                         <p className="text-sm font-light p-2">RateX / Add Service</p>
