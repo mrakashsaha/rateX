@@ -64,7 +64,6 @@ const Services = () => {
     const handleSortbyPrice = () => {
         if (ascending === null) {
             setAscending(true);
-            console.log("soto theke boro sajao");
             const sortinAscending = services.sort((a, b) => a.price - b.price);
             setServices(sortinAscending);
 
@@ -72,14 +71,12 @@ const Services = () => {
 
         if (ascending === true) {
             setAscending(false);
-            console.log("boro theke soto sajao");
             const sortinDescending = services.sort((a, b) =>b.price - a.price );
             setServices(sortinDescending);
         }
 
         if (ascending === false) {
             setAscending(true);
-            console.log("soto theke boro sajao")
             const sortinAscending = services.sort((a, b) => a.price - b.price);
             setServices(sortinAscending);
         }
@@ -96,7 +93,7 @@ const Services = () => {
             <Helmet>
                 <title>RateX | Services</title>
             </Helmet>
-            <div className="relative h-52 lg:h-60 object-fill" style={{ backgroundImage: `url(${bg1})` }}>
+            <div className="relative h-52 lg:h-60 bg-cover" style={{ backgroundImage: `url(${bg1})` }}>
                 <div className="absolute inset-0 bg-black/10 flex flex-col justify-center p-16 text-white">
                     <div className='mx-auto container'>
                         <p className="text-sm font-light p-2">RateX / Services</p>

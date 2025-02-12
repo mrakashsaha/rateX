@@ -15,6 +15,7 @@ import ServiceDetails from './components/ServiceDetails';
 import axiosAPI from './axios/axiosAPI';
 import ErrorPage from './components/ErrorPage'
 import PrivateRouter from './layouts/PrivateRouter';
+import Faqs from './components/Faqs';
 
 const router = createBrowserRouter([
   {
@@ -37,6 +38,10 @@ const router = createBrowserRouter([
       {
         path: "/services",
         element: <Services></Services>,
+      },
+      {
+        path: "/faqs",
+        element: <Faqs></Faqs>
       },
       {
         path: "/addServices",

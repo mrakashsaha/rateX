@@ -7,7 +7,7 @@ const MyReviewCard = ({servicesData, reviewCardData, handleDeleteReview, openUpd
     const serviceData = servicesData.find (service=>service._id === serviceId);
     return (
         <div>
-            <div className="flex bg-white rounded-lg shadow-md p-6 items-end justify-between">
+            <div className="flex bg-base-100 rounded-lg shadow-md p-6 items-end justify-between">
                 <div className="flex flex-col md:gap-4">
                     {/* Service Title */}
                     <h2 className="text-xl font-bold">{serviceData?.title || 'Service Deleted!'}</h2>
