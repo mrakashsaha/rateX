@@ -124,7 +124,7 @@ const MyServices = () => {
                 <title>RateX | My Services</title>
             </Helmet>
             <div className="relative h-52 lg:h-60 bg-cover" style={{ backgroundImage: `url(${bg1})` }}>
-                <div className="absolute inset-0 bg-black/10 flex flex-col justify-center p-16 text-white">
+                <div className="absolute inset-0 bg-black/10 flex flex-col justify-center p-16 text-white dark:text-base-300">
                     <div className='mx-auto container'>
                         <p className="text-sm font-light p-2">RateX / My Services</p>
                         <h1 className="text-4xl font-bold">Services Added by You</h1>
@@ -151,7 +151,7 @@ const MyServices = () => {
                         </svg>
                     </label>
                 </div>
-                <div className='bg-base-100 shadow-inherit border'>
+                <div className='bg-base-100 shadow-inherit border border-base-200'>
                     <div className="overflow-x-auto">
                         <table className="table">
                             {/* head */}

@@ -30,7 +30,7 @@ const ServiceCard = ({ service }) => {
                     <h2 className="card-title text-lg font-bold">{title}</h2>
                     <p className="text-gray-600 line-clamp-2">{description}</p>
                     <div className="card-actions justify-end mt-2">
-                        <Link to={`/serviceDetails/${_id}`} className="btn bg-[#04B2B2] hover:bg-[#038787] text-white w-full">See Details</Link>
+                        <Link to={`/serviceDetails/${_id}`} className="btn bg-[#04B2B2] hover:bg-[#038787] text-white dark:text-base-300 w-full">See Details</Link>
                     </div>
                 </div>
             </div>

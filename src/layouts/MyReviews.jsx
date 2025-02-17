@@ -100,7 +100,7 @@ const MyReviews = () => {
                 <title>RateX | My Reviews</title>
             </Helmet>
             <div className="relative h-52 lg:h-60 bg-cover" style={{ backgroundImage: `url(${bg4})` }}>
-                <div className="absolute inset-0 bg-black/10 flex flex-col justify-center p-16 text-white">
+                <div className="absolute inset-0 bg-black/10 flex flex-col justify-center p-16 text-white dark:text-base-300">
                     <div className='mx-auto container'>
                         <p className="text-sm font-light p-2">RateX / My Reviews</p>
                         <h1 className="text-4xl font-bold">Reviews of Yours</h1>
@@ -145,7 +145,7 @@ const MyReviews = () => {
                                         isRequired
                                     />
                                 </div>
-                                <button className="btn bg-[#04B2B2] hover:bg-[#038787] text-white w-full">Update Review</button>
+                                <button className="btn bg-[#04B2B2] hover:bg-[#038787] text-white dark:text-base-300 w-full">Update Review</button>
                             </form>
 
                             <div className="modal-action m-0 form-control">

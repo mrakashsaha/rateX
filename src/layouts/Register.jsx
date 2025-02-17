@@ -71,7 +71,7 @@ const Register = () => {
                 <title>RateX | Register</title>
             </Helmet>
             <div>
-                <div className="hero bg-[#eef7f7] min-h-screen py-10">
+                <div className="hero bg-[#eef7f7] dark:bg-base-300 min-h-screen py-10">
                     <div className="hero-content flex-col md:gap-28 md:flex-row">
                         <div>
                             <div className='max-w-xs md:max-w-md'>
@@ -112,7 +112,7 @@ const Register = () => {
                                         formError && <p className='text-[#EA4335] text-base pt-2'>Error: {formError} </p>
                                     }
                                     <div className="form-control mt-4">
-                                        <button className="btn bg-[#04B2B2] hover:bg-[#038787] text-white">Sign Up</button>
+                                        <button className="btn bg-[#04B2B2] hover:bg-[#038787] dark:text-base-300 text-white">Sign Up</button>
                                     </div>
                                 </form>
                                 <div className='border-t border-1 border-blue-600 border-dotted mt-4'></div>

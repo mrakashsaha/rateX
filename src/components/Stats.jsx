@@ -12,7 +12,7 @@ const Stats = () => {
     }, [])
 
     return (
-        <div className='bg-[#F5F7F9] mt-28'>
+        <div className='bg-[#F5F7F9] dark:bg-base-200 mt-28'>
             <div className='container p-2 mx-auto rounded-lg grid grid-cols-1 sm:grid-cols-3 gap-10 py-10'>
                 <div className='text-[#151515} text-center space-y-2 md:border-r'>
                     <CountUp

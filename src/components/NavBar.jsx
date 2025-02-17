@@ -1,6 +1,7 @@
 import React, { useContext } from 'react';
 import { Link, NavLink, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../context/AuthProvider';
+import ThemeToggle from './ThemeToggle';
 
 const NavBar = () => {
     const navigate = useNavigate();
@@ -22,19 +23,19 @@ const NavBar = () => {
 
     const menu =
         <>
-            <li className='text-lg font-medium'><NavLink to={"/"}>Home</NavLink></li>
-            <li className='text-lg font-medium'><NavLink to={"/services"}>Services</NavLink></li>
-            <li className='text-lg font-medium'><NavLink to={"/faqs"}>Faqs</NavLink></li>
+            <li className='md:text-lg font-medium'><NavLink to={"/"}>Home</NavLink></li>
+            <li className='md:text-lg font-medium'><NavLink to={"/services"}>Services</NavLink></li>
+            <li className='md:text-lg font-medium'><NavLink to={"/faqs"}>Faqs</NavLink></li>
             {
                 user && <>
-                    <li className='text-lg font-medium'><NavLink to={"/addServices"}>Add Service</NavLink></li>
-                    <li className='text-lg font-medium'><NavLink to={"/myReviews"}>My Reviews</NavLink></li>
-                    <li className='text-lg font-medium'><NavLink to={"/myServices"}>My Services</NavLink></li>
+                    <li className='md:text-lg font-medium'><NavLink to={"/addServices"}>Add Service</NavLink></li>
+                    <li className='md:text-lg font-medium'><NavLink to={"/myReviews"}>My Reviews</NavLink></li>
+                    <li className='md:text-lg font-medium'><NavLink to={"/myServices"}>My Services</NavLink></li>
                 </>
             }
         </>
     return (
-        <div className='bg-base-100 sticky -top-1 drop-shadow-md w-full z-50'>
+        <div className='bg-base-100 sticky top-0 drop-shadow-md py-1 w-full z-50'>
             <div className="navbar container mx-auto">
                 <div className="navbar-start">
                     <div className="dropdown ">
@@ -70,6 +71,7 @@ const NavBar = () => {
                     </ul>
                 </div>
                 <div className="navbar-end space-x-3">
+                    <ThemeToggle></ThemeToggle>
                     {
                         loading ? <span className="loading loading-ring loading-lg"></span>
                             : user ?
@@ -81,12 +83,12 @@ const NavBar = () => {
                                                 src={user?.photoURL} />
                                         </div>
                                     </div>
-                                    <button onClick={handleLogout} className="btn text-base px-4 bg-[#04B2B2] hover:bg-[#038787] text-white">Logout</button>
+                                    <button onClick={handleLogout} className="btn text-base px-4 bg-[#04B2B2] hover:bg-[#038787] text-white dark:text-base-300">Logout</button>
                                 </>
                                 :
                                 <>
-                                    <Link to={"/login"} className="btn text-base px-4 bg-[#04B2B2] hover:bg-[#038787] text-white">Login</Link>
-                                    <Link to={"/register"} className="btn text-base px-4">Register</Link>
+                                    <Link to={"/login"} className="btn text-base px-4 bg-[#04B2B2] hover:bg-[#038787] text-white dark:text-base-300">Login</Link>
+                                    <Link to={"/register"} className="btn btn-outline border-2 hover:border-[#04B2B2] border-[#04B2B2] hover:bg-[#04B2B2] text-base px-4">Register</Link>
                                 </>
                     }
 

@@ -30,7 +30,7 @@ const MyServicesTableRow = ({ myService, idx, handleDelete, handleUpdate }) => {
                     <div className="font-medium">{moment(date).format('DD-MM-YYYY, hh:mm  a')}</div>
                 </td>
                 <td>
-                    <button onClick={() => handleUpdate(_id)} className='btn btn-md bg-[#04B2B2] hover:bg-[#038787] text-white'>Edit</button>
+                    <button onClick={() => handleUpdate(_id)} className='btn btn-md bg-[#04B2B2] hover:bg-[#038787] text-white dark:text-base-300'>Edit</button>
                 </td>
                 <td>
                     <button onClick={() => handleDelete(_id)} className='btn btn-md border-[#04B2B2] bg-[#eef7f7] text-[#151515] hover:bg-[#038787] hover:text-white'>Delete</button>

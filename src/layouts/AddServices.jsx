@@ -47,7 +47,7 @@ const AddServices = () => {
                 <title>RateX | Add Services</title>
             </Helmet>
             <div className="relative h-52 lg:h-60 bg-cover" style={{ backgroundImage: `url(${bg3})` }}>
-                <div className="absolute inset-0 bg-black/10 flex flex-col justify-center p-16 text-white">
+                <div className="absolute inset-0 bg-black/10 flex flex-col justify-center p-16 text-white dark:text-base-300">
                     <div className='mx-auto container'>
                         <p className="text-sm font-light p-2">RateX / Add Service</p>
                         <h1 className="text-4xl font-bold">Add a New Service</h1>
@@ -157,7 +157,7 @@ const AddServices = () => {
 
                     {/* Submit Button */}
                     <div className="form-control py-2">
-                        <input className='btn-md btn bg-[#04B2B2] hover:bg-[#038787] text-white' type="submit" value="Add Service" />
+                        <input className='btn-md btn bg-[#04B2B2] hover:bg-[#038787] text-white dark:text-base-300' type="submit" value="Add Service" />
                     </div>
                 </form>
             </div>

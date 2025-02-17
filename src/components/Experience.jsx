@@ -1,6 +1,6 @@
 import React from 'react';
 import { FaCircleCheck } from 'react-icons/fa6';
-import xpModel from '../assets/xp/xpModel.png'
+import xpMOdel2 from '../assets/xp/xpModel2.png'
 import xpBadge1 from '../assets/xp/xpBadge1.png'
 import xpBadge2 from '../assets/xp/xpBadge2.png'
 import { Link } from 'react-router-dom';
@@ -12,7 +12,7 @@ const Experience = () => {
         <div className=''>
             <div className='container mx-auto py-20'>
                 <div className='flex flex-col md:flex-row items-center justify-between'>
-                    <div className='text-[#151515] p-4 md:w-1/2'>
+                    <div className='p-4 md:w-1/2'>
                         <div className='my-6'>
                             <h2 className='text-3xl md:text-4xl font-semibold my-4'>Experience a quicker, simpler, and more reliable awesome service </h2>
                             <p className='text-lg'>Our platform offers intuitive tools, trusted reviews, and tailored suggestions to streamline your search for the perfect service.</p>
@@ -22,11 +22,11 @@ const Experience = () => {
                         <p className='text-lg flex items-center gap-4 my-4'> <FaCircleCheck className='text-xl text-[#04B2B2]'></FaCircleCheck> Share and read reviews to make confident and informed choices.</p>
                         <p className='text-lg flex items-center gap-4 my-4'> <FaCircleCheck className='text-xl text-[#04B2B2]'></FaCircleCheck> Manage your reviews and services effortlessly with user-friendly tools.</p>
                         <Link to={"/register"} 
-                        className='btn text-right lg:btn-lg text-base bg-[#04B2B2] hover:bg-[#038787] text-white mt-4'>Register Now</Link>
+                        className='btn text-right lg:btn-lg text-base bg-[#04B2B2] hover:bg-[#038787] text-white dark:text-base-300 mt-4'>Register Now</Link>
                     </div>
                     <div className='relative overflow-hidden'>
                         <div>
-                            <img className='w-full p-10' src={xpModel} alt="model" />
+                            <img className='w-full p-10' src={xpMOdel2} alt="model" />
                         </div>
                         <motion.div className='absolute -right-4 md:-right-2 top-24'
                             animate={{ y: [40, 0, 40] }}

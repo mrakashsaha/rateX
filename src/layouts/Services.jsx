@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, {useEffect, useState } from 'react';
 import axiosAPI from '../axios/axiosAPI';
 import ServiceCard from '../components/ServiceCard';
 import { FiFilter } from 'react-icons/fi';
@@ -6,7 +6,6 @@ import { Helmet } from 'react-helmet';
 import bg1 from '../assets/backgrounds/bg1.jpg'
 import NoDataInSearch from '../components/NoDataInSearch';
 import Spinner from '../components/Spinner';
-import { FaArrowDownShortWide, FaArrowUpShortWide } from 'react-icons/fa6';
 import { FaSortAmountDown, FaSortAmountUp } from 'react-icons/fa';
 import { RxCaretSort } from 'react-icons/rx';
 
@@ -94,7 +93,7 @@ const Services = () => {
                 <title>RateX | Services</title>
             </Helmet>
             <div className="relative h-52 lg:h-60 bg-cover" style={{ backgroundImage: `url(${bg1})` }}>
-                <div className="absolute inset-0 bg-black/10 flex flex-col justify-center p-16 text-white">
+                <div className="absolute inset-0 bg-black/10 flex flex-col justify-center p-16 text-white dark:text-base-300">
                     <div className='mx-auto container'>
                         <p className="text-sm font-light p-2">RateX / Services</p>
                         <h1 className="text-4xl font-bold">All Services</h1>
@@ -111,7 +110,7 @@ const Services = () => {
                                 </div>
                             </div>
                             <div className="indicator">
-                                <button className="btn join-item bg-[#04B2B2] hover:bg-[#038787] text-white">Search</button>
+                                <button className="btn join-item bg-[#04B2B2] hover:bg-[#038787] text-white dark:text-base-300">Search</button>
                             </div>
                         </div>
                     </form>
@@ -121,7 +120,7 @@ const Services = () => {
                         </div>
                         <div>
                             <div className="dropdown dropdown-bottom dropdown-end">
-                                <div tabIndex={0} role="button" className="btn m-1 bg-[#04B2B2] hover:bg-[#038787] text-white"> <FiFilter className='hidden sm:block'></FiFilter> Category : {displayCategoryName} </div>
+                                <div tabIndex={0} role="button" className="btn m-1 bg-[#04B2B2] hover:bg-[#038787] text-white dark:text-base-300"> <FiFilter className='hidden sm:block'></FiFilter> Category : {displayCategoryName} </div>
                                 <ul tabIndex={0} className="dropdown-content menu bg-base-100 rounded-box z-[1] p-2 shadow">
                                     <li><button onClick={() => setReFetch((alter) => !alter)} >All</button> </li>
                                     <li><button onClick={() => handleCategory("Cleaning")} >Cleaning</button> </li>

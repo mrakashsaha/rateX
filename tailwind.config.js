@@ -7,8 +7,13 @@ export default {
   theme: {
     extend: {},
   },
+  darkMode: "class",
   plugins: [
     require('daisyui'),
   ],
+
+  daisyui: {
+    themes: ["dark", "light"],
+  },
 }
 

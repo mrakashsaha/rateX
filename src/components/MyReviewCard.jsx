@@ -29,7 +29,7 @@ const MyReviewCard = ({servicesData, reviewCardData, handleDeleteReview, openUpd
 
                 {/* Action Buttons */}
                 <div className="flex justify-end gap-4 mt-4 flex-col sm:flex-row">
-                    <button onClick={()=>openUpdateReviewModal(_id)} className="btn bg-[#04B2B2] hover:bg-[#038787] text-white">Update</button>
+                    <button onClick={()=>openUpdateReviewModal(_id)} className="btn bg-[#04B2B2] hover:bg-[#038787] text-white dark:text-base-300">Update</button>
                     <button onClick={()=>handleDeleteReview(_id)} className="btn border-[#04B2B2] bg-[#eef7f7] text-[#151515] hover:bg-[#038787] hover:text-white">Delete</button>
                 </div>
             </div>

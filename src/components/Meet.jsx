@@ -101,11 +101,11 @@ const Meet = () => {
                 <SwiperSlide className='pb-8'>
                     <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 p-2 md:p-0'>
                         {partners1.map((patner, idx) => (
-                            <div key={idx} className="bg-white border border-[#F5F7F9] shadow-md rounded-lg p-10 flex flex-col">
+                            <div key={idx} className="bg-base-100 border border-base-200 shadow-md rounded-lg p-10 flex flex-col">
                                 <p className="text-lg">
                                     {patner.description}
                                 </p>
-                                <hr className="my-4" />
+                                <hr className="my-4 border-base-300" />
                                 <div className="flex items-center mt-auto">
                                     <img
                                         className="w-12 h-12 rounded-full"
@@ -124,11 +124,11 @@ const Meet = () => {
                 <SwiperSlide className='pb-8'>
                     <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 p-2 md:p-0'>
                         {partners2.map((patner, idx) => (
-                            <div key={idx} className="bg-white border border-[#F5F7F9] shadow-md rounded-lg p-10 flex flex-col">
+                            <div key={idx} className="bg-base-100 border border-base-200 shadow-md rounded-lg p-10 flex flex-col">
                                 <p className="text-lg">
                                     {patner.description}
                                 </p>
-                                <hr className="my-4" />
+                                <hr className="my-4 border-base-300" />
                                 <div className="flex items-center mt-auto">
                                     <img
                                         className="w-12 h-12 rounded-full"
@@ -147,11 +147,11 @@ const Meet = () => {
                 <SwiperSlide className='pb-8'>
                     <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 p-2 md:p-0'>
                         {partners3.map((patner, idx) => (
-                            <div key={idx} className="bg-white border border-[#F5F7F9] shadow-md rounded-lg p-10 flex flex-col">
+                            <div key={idx} className="border bg-base-100 border-base-200 shadow-md rounded-lg p-10 flex flex-col">
                                 <p className="text-lg">
                                     {patner.description}
                                 </p>
-                                <hr className="my-4" />
+                                <hr className="my-4 border-base-300" />
                                 <div className="flex items-center mt-auto">
                                     <img
                                         className="w-12 h-12 rounded-full"
